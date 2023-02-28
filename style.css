@@ -11,7 +11,7 @@
     --form-font-color: #FEDB39;
     --other-font-color: #E3F6FF;
     --valid-color: #8BF5FA;
-    --invalid-color: #red;
+    --invalid-color: red;
 }
 
 
@@ -131,7 +131,7 @@ input {
     padding: 5px;
 }
 
-input.error {
+input.valid {
     border: 2px solid #1fe5f0;
     box-shadow: 0 0 3px 2px var(--valid-color);
 }
@@ -141,6 +141,24 @@ input.invalid {
     box-shadow: 0 0 3px 2px var(--invalid-color);
 }   
 
+.error-message {
+    list-style-type: disc;
+    list-style-position: inside;
+    color: #EB455F;
+    font-size: calc(0.7 * var(--label-and-input-fontSize));
+    text-align: left;
+    margin-left: var(--label-and-input-margin);
+    /* padding-left: 0.5em; */
+}
+
+li {
+    text-indent: -1rem;
+    padding-left: 1rem;
+}
+
+.reminder {
+    color: #F9F54B;
+}
 
 button[type="submit"] {
     margin: 15px;

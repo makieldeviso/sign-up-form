@@ -11,6 +11,17 @@ const confirmPassword = document.querySelector("#confirm-password");
 
 
 
+function CheckUserAction(status) {
+    this.status = status;
+}
+    let firstNameStatus = new CheckUserAction(false);
+    let lastNameStatus = new CheckUserAction(false);
+    let emailStatus = new CheckUserAction(false);
+    let phoneNumberStatus = new CheckUserAction(false);
+    let passwordStatus = new CheckUserAction(false);
+    let confirmPasswordStatus = new CheckUserAction(false);
+
+
 
 // const form = document.querySelector("form.create-account");
 //     form.addEventListener("submit", validateInput);
@@ -22,6 +33,7 @@ function validateInputField() {
 //  checks what input field is being validated
     let inputField = `${"#" + this.id}`;  // Id Selector String
     let inputElement = document.querySelector(`${inputField}`);
+    let inputFieldName = [];
 
     let fieldValue = this.value.trim();
     let errorList = document.querySelector(`${inputField} + ul`);
@@ -31,6 +43,9 @@ function validateInputField() {
 // Validation Starts Here
 // Validates First Name Input Field
     if (inputField === "#first-name") {
+    // Remembers that the user has checked/viewed this input field
+        inputFieldName.push(firstNameStatus);
+        
         if (fieldValue.length === 0) {
             errors.push("Field is empty. Kindly fill in a valid first name");
         } else if (fieldValue === null) {
@@ -40,6 +55,9 @@ function validateInputField() {
 
 // Validates Last Name Input Field
 if (inputField === "#last-name") {
+// Remembers that the user has checked/viewed this input field
+    inputFieldName.push(lastNameStatus);
+
     if (fieldValue.length === 0) {
         errors.push("Field is empty. Kindly fill in a valid last name");
     } else if (fieldValue === null) {
@@ -49,6 +67,9 @@ if (inputField === "#last-name") {
 
 // Validates email Input Field
 if (inputField === "#email") {
+// Remembers that the user has checked/viewed this input field
+    inputFieldName.push(emailStatus);
+
     let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
     if (fieldValue.length === 0) {
@@ -65,8 +86,11 @@ if (inputField === "#email") {
     }
 }
 
-// Validates email Input Field
+// Validates phone Input Field
 if (inputField === "#phone-number") {
+// Remembers that the user has checked/viewed this input field
+    inputFieldName.push(phoneNumberStatus);
+
     let phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
     if (fieldValue.length === 0) {
@@ -80,8 +104,6 @@ if (inputField === "#phone-number") {
     if (errors.length != 0) {
         errors.push("Reminder: phone number is optional");
     }
-
-    console.log(fieldValue);
 }
 
     
@@ -131,7 +153,16 @@ if (inputField === "#phone-number") {
         }
         inputElement.classList.add("valid");
     }
-    
+  
+
+    //Adds active input listening that guides user if 
+    // they already input in correct format, 
+    // only triggers if the user has already checked field before
+     
+    if (inputFieldName[0]["status"] === false) {
+        inputFieldName[0]["status"] = true;
+        inputElement.addEventListener("input", validateInputField);
+    }
+
+    console.log(inputFieldName);
 }
-
-

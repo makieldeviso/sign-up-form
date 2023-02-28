@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+:root {
+    --header-height: 5vh;
+    --footer-height: 5vh;
+    --title-font: 'Montserrat', sans-serif;
+    --main-font: 'Montserrat', sans-serif;
+    --label-and-input-margin: 10%;
+    --label-and-input-fontSize: 1rem;
+    --form-bg-color: rgba(47, 53, 55, 0.7);
+    --form-font-color: #FEDB39;
+    --other-font-color: #E3F6FF;
+    --valid-color: #8BF5FA;
+    --invalid-color: #red;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+}
+
+
+header {
+    height: var(--header-height);
+    background-color: var(--form-bg-color);
+}
+main {
+    padding: 10px;
+    text-align: center;
+    height: calc(100vh - var(--footer-height) - var(--header-height))
+}
+
+footer {
+    height: var(--footer-height);
+    
+}
+
+div#hero-image {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    background-image: url("./images/cityscape.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    
+}
+
+div#hero-image .background {
+    height: 100%;
+    background: linear-gradient(0.25turn, 
+        black, 
+        #020100, 
+        rgba(33, 39, 48, 0.5), 
+        rgba(57, 62, 70, 0.5));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#hero-image img {
+    position: absolute;
+    bottom:0;
+    left: 0;
+    height: 90%;
+    object-fit:cover;
+}
+
+div#create-account {
+    width: 100%;
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+}
+
+div#form-main {
+    background-color: var(--form-bg-color);
+    margin: auto;
+    width: 95%;
+    padding: 5px;
+}
+
+
+#hero-image h1 {
+    font-family: var(--title-font);
+    font-size: 2rem;
+    color: var(--other-font-color);
+    z-index: 1;
+}
+
+#create-account p {
+    font-size: 1.3rem;
+    margin: 15px auto;
+    color: var(--other-font-color);
+}
+
+.input-div {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-div:last-of-type {
+    margin-bottom: 0;
+}
+
+.input-div label {
+    text-align: left;
+    margin-left: var(--label-and-input-margin);
+    font-size: var(--label-and-input-fontSize);
+    color: var(--form-font-color);
+}
+span.optional {
+    font-style: italic;
+    font-size: calc(0.8 * var(--label-and-input-fontSize));
+}
+
+input {
+    display: block;
+    margin: 5px var(--label-and-input-margin);
+    width: 80%;
+    font-size: var(--label-and-input-fontSize);
+    padding: 5px;
+}
+
+input.error {
+    border: 2px solid #1fe5f0;
+    box-shadow: 0 0 3px 2px var(--valid-color);
+}
+
+input.invalid {
+    border: 2px solid red;
+    box-shadow: 0 0 3px 2px var(--invalid-color);
+}   
+
+
+button[type="submit"] {
+    margin: 15px;
+    width: max-content;
+    padding: 5px;
+    font-size: var(--label-and-input-fontSize);
+}
+
+#create-account .button-div p {
+    font-size: 1rem;
+    margin: 5px;
+    display: inline-block;
+}
+
+

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="Create an account an enjoy hassle free shopping of our catalog">
     <meta name="author" content="Fred Mark Baldeviso">
+    <script src="https://kit.fontawesome.com/ff4bf87dd5.js" crossorigin="anonymous"></script>
     <script src="index.js" defer></script>
     <title>Sign-up for waryur-helmets.com</title>
 </head>
@@ -15,13 +16,15 @@
     <main>
         <div id="hero-image">
             <div class="background">
-                <img src="./images/hero-image.png" alt="Model with a helmet on">
-                <h1>WarYur Helmets</h1>
+                <img id="model" src="./images/hero-image.png" alt="Model with a helmet on">
+                <img id="banner" src="./images/banner.png" alt="Waryur helmets banner">
+                <p id="slogan">RIDE FREE</p>
+                <!-- <h1>WarYur Helmets</h1> -->
             </div>
         </div>
 
         <div id="create-account">
-            <p>Create your Account</p>
+            <p>Create your account</p>
             <form action="" method="" class="create-account">
                 <div id="form-main">
                     <div class="input-div">
@@ -45,7 +48,7 @@
                         <input type="email"
                             id="email"
                             name="email"
-                            placeholder="sample@gmail.com">
+                            placeholder="example@gmail.com">
                         <ul class="error-message"></ul>
                     </div>
     
@@ -62,6 +65,13 @@
                         <input type="password"
                             id="password"
                             name="password">
+                        <ul class="guide">
+                            <li data-check="length"><i class="fa-regular fa-circle-dot"></i> Must be at least 8 characters </li>
+                            <li data-check="number"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 number</li>
+                            <li data-check="capital"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 capital letter</li>
+                            <li data-check="lower"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 letter in lower case</li>
+                            <li data-check="special-char"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 special character</li>
+                        </ul>
                         <ul class="error-message"></ul>
                     </div>
     

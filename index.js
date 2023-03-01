@@ -1,12 +1,19 @@
 const firstName = document.querySelector("#first-name");
+    firstName.addEventListener("click", clearStyling);
     firstName.addEventListener("blur", validateInputField);
 const lastName = document.querySelector("#last-name");
+    lastName.addEventListener("click", clearStyling);
     lastName.addEventListener("blur", validateInputField);
 const email = document.querySelector("#email");
+    email.addEventListener("click", clearStyling);
     email.addEventListener("blur", validateInputField);
 const phoneNumber = document.querySelector("#phone-number");
+    // phoneNumber.addEventListener("click", clearStyling);
     phoneNumber.addEventListener("blur", validateInputField);
 const password = document.querySelector("#password");
+    password.addEventListener("click", validatePassword);
+    password.addEventListener("input", validatePassword);
+    password.addEventListener("blur", validatePassword);
 const confirmPassword = document.querySelector("#confirm-password");
 
 
@@ -27,8 +34,19 @@ function CheckUserAction(status) {
 //     form.addEventListener("submit", validateInput);
 
 
+function clearStyling() {
+        if (this.hasAttribute("class")) {
+            this.removeAttribute("class")
+        }
+    
+    this.nextElementSibling.style.display = "none";
+}
+
+
+
 
 function validateInputField() {
+
 //Gets the input element id as string and 
 //  checks what input field is being validated
     let inputField = `${"#" + this.id}`;  // Id Selector String
@@ -70,7 +88,7 @@ if (inputField === "#email") {
 // Remembers that the user has checked/viewed this input field
     inputFieldName.push(emailStatus);
 
-    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
     if (fieldValue.length === 0) {
         errors.push("Field is empty. Kindly fill in a valid email address");
@@ -82,7 +100,7 @@ if (inputField === "#email") {
         if (fieldValue.length != 0) {
             errors.push("Kindly enter a valid email address");
         } 
-        errors.push("A valid email address looks like this: sample@gmail.com")
+        errors.push("Make sure it's written like example@email.com")
     }
 }
 
@@ -105,8 +123,7 @@ if (inputField === "#phone-number") {
         errors.push("Reminder: phone number is optional");
     }
 }
-
-    
+ 
 // Removes error list
     function removeErrorList(field) {
 
@@ -128,12 +145,15 @@ if (inputField === "#phone-number") {
 
         errors.forEach(message => {
             let errorMessage = document.createElement("li");
-            errorMessage.textContent = message;
+            errorMessage.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> ${message}`
+            // errorMessage.textContent = message;
             if (errorMessage.textContent.includes("Reminder")) {
+                errorMessage.innerHTML = `<i class="fa-solid fa-exclamation"></i> ${message}`
                 errorMessage.classList.add("reminder");
                 // Adds styling to reminder;
             }
             errorList.appendChild(errorMessage);
+            errorList.style.display = "unset"; // Show error list
         });
 
         if (inputElement.hasAttribute("class")) {
@@ -153,7 +173,6 @@ if (inputField === "#phone-number") {
         }
         inputElement.classList.add("valid");
     }
-  
 
     //Adds active input listening that guides user if 
     // they already input in correct format, 
@@ -164,5 +183,139 @@ if (inputField === "#phone-number") {
         inputElement.addEventListener("input", validateInputField);
     }
 
-    console.log(inputFieldName);
 }
+
+
+
+
+
+let listItemArray = [];
+function ListItem(listElement, listIcon) {
+    this.listElement = listElement;
+    this.listIcon = listIcon;
+    this.passed = "neutral";
+    listItemArray.push(this);
+}
+
+let numberCheck = new ListItem(document.querySelector("[data-check='number']"), 
+    document.querySelector("[data-check='number'] i"));
+let capitalCheck = new ListItem(document.querySelector("[data-check='capital']"), 
+    document.querySelector("[data-check='capital'] i"));
+let lowerCheck = new ListItem(document.querySelector("[data-check='lower']"), 
+    document.querySelector("[data-check='lower'] i"));
+let specialCheck = new ListItem(document.querySelector("[data-check='special-char']"), 
+    document.querySelector("[data-check='special-char'] i"));
+let lengthCheck = new ListItem(document.querySelector("[data-check='length']"), 
+    document.querySelector("[data-check='length'] i"));
+
+// let viewed = false;
+function validatePassword(event) {
+    let guideList = document.querySelector(".guide");
+    guideList.style.display = "unset";
+
+    if (event.type === "click") {
+        if (this.hasAttribute("class")) {
+            this.removeAttribute("class")
+        }
+    }
+
+     function promptValidity(validity,object) {
+         if (validity === true) {
+            object["listIcon"].removeAttribute("class");
+            object["listIcon"].classList.add("fa-regular", "fa-circle-check");
+            object["listElement"].style.color = "#06FF00";
+            object["passed"] = true;
+
+         } else if (validity === "neutral") {
+            object["listIcon"].removeAttribute("class");
+            object["listIcon"].classList.add("fa-regular", "fa-circle-dot");
+            object["listElement"].style.color = "var(--other-font-color)";
+            object["passed"] = "neutral";
+            
+        } else if (validity === false) {
+            object["listIcon"].removeAttribute("class");
+            object["listIcon"].classList.add("fa-regular", "fa-circle-xmark");
+            object["listElement"].style.color = "#FF1700";
+            object["passed"] = false;
+        }
+
+    }
+
+
+
+// Check if password has 1 number
+    if (/(?=.*\d)/.test(this.value)) {
+        promptValidity(true, numberCheck);
+    } else {
+        if (event.type === "input" || event.type === "click") {
+            promptValidity("neutral", numberCheck);
+        } else if (event.type === "blur") {
+            promptValidity(false, numberCheck);
+        }
+    }
+    console.log(numberCheck["viewed"]);
+
+// Check if password has 1 capital letter
+    if (/(?=.*[A-Z])/.test(this.value)) {
+        promptValidity(true, capitalCheck);
+    } else {
+        if (event.type === "input" || event.type === "click") {
+            promptValidity("neutral", capitalCheck);
+        } else if (event.type === "blur") {
+            promptValidity(false, capitalCheck);
+        }
+    }
+
+// Check if password has 1 lower case letter
+    if (/(?=.*[a-z])/.test(this.value)) {
+        promptValidity(true, lowerCheck);
+    } else {
+        if (event.type === "input" || event.type === "click") {
+            promptValidity("neutral", lowerCheck);
+        } else if (event.type === "blur") {
+            promptValidity(false, lowerCheck);
+        }
+    }
+
+// Check if password has 1 special character
+    if (/(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/.test(this.value)) {
+        promptValidity(true, specialCheck);
+    } else {
+        if (event.type === "input" || event.type === "click") {
+            promptValidity("neutral", specialCheck);
+        } else if (event.type === "blur") {
+            promptValidity(false, specialCheck);
+        }
+    }
+
+// Check if password is at least 8 characters
+if (/.{8,}/.test(this.value)) {
+    promptValidity(true, lengthCheck);
+} else {
+    if (event.type === "input" || event.type === "click") {
+        promptValidity("neutral", lengthCheck);
+    } else if (event.type === "blur") {
+        promptValidity(false, lengthCheck);
+    }
+}
+
+    if (event.type === "blur") {
+        let resultsArray = [];
+
+        listItemArray.forEach(item => {
+            resultsArray.push(item["passed"]);
+        })
+    
+        if (resultsArray.includes(false) || resultsArray.includes("neutral")) {
+            this.classList.add("invalid");
+        } else {
+            this.classList.add("valid");
+            guideList.style.display = "none";
+        }
+
+    }
+    
+}
+
+
+

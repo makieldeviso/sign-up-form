@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Work+Sans:wght@300&display=swap');
 
 :root {
     --header-height: 5vh;
@@ -64,12 +64,42 @@ div#hero-image .background {
 }
 
 
-#hero-image img {
+#hero-image img#model {
     position: absolute;
     bottom:0;
     left: 0;
     height: 90%;
     object-fit:cover;
+}
+
+#hero-image img#banner {
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    background: linear-gradient(0.75turn, 
+        rgba(0, 0, 0, 0.4), 
+        rgba(2, 1, 0, 0.3), 
+        rgba(33, 39, 48, 0.2), 
+        rgba(57, 62, 70, 0));
+    padding: 5px 10%;
+}
+
+#hero-image p#slogan {
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bolder;
+    width: 100%;
+    padding: 0 15%;
+    text-align: right;
+    text-shadow: 0 0 3px black;
+    font-style: italic;
+    background: linear-gradient(0.75turn, 
+        rgba(249, 245, 75, 0.7), 
+        rgba(139, 245, 250, 0.5), 
+        rgba(63, 151, 155, 0.3),
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0));
+    z-index: 1;
 }
 
 div#create-account {
@@ -88,12 +118,13 @@ div#form-main {
 }
 
 
-#hero-image h1 {
+
+/* #hero-image h1 {
     font-family: var(--title-font);
     font-size: 2rem;
     color: var(--other-font-color);
     z-index: 1;
-}
+} */
 
 #create-account p {
     font-size: 1.3rem;
@@ -141,20 +172,25 @@ input.invalid {
     box-shadow: 0 0 3px 2px var(--invalid-color);
 }   
 
-.error-message {
-    list-style-type: disc;
-    list-style-position: inside;
+.error-message, .guide {
+    list-style-type: none;
     color: #EB455F;
     font-size: calc(0.7 * var(--label-and-input-fontSize));
     text-align: left;
     margin-left: var(--label-and-input-margin);
+    vertical-align: middle;
     /* padding-left: 0.5em; */
 }
 
-li {
-    text-indent: -1rem;
-    padding-left: 1rem;
+.error-message i, .guide i {
+    vertical-align: middle;
 }
+
+.guide {
+    display: none;
+    color: var(--other-font-color);
+}
+
 
 .reminder {
     color: #F9F54B;

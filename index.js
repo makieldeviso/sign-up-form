@@ -16,6 +16,11 @@ const confirmPassword = document.querySelector("#confirm-password");
     confirmPassword.addEventListener("blur", validateConfirmPassword);
 
 
+const form = document.querySelector("form.create-account");
+    form.addEventListener("submit", submitForm);
+
+
+
 let overAllValidation = [];
 function CheckUserAction(name, viewed) {
     this.name = name;
@@ -43,14 +48,15 @@ function clearStyling() {
 
 
 function validateInputField() {
-    
+
 //Gets the input element id as string and 
 //  checks what input field is being validated
     let inputField = `${"#" + this.id}`;  // Id Selector String
     let inputElement = document.querySelector(`${inputField}`);
     let inputFieldName = [];
 
-    let fieldValue = this.value.trim();
+    let fieldValue = this.value.trim(); // Ensures no whitespace
+    
     let errorList = document.querySelector(`${inputField} + ul`);
     let errors = [];
 
@@ -375,7 +381,6 @@ function activePassListening() {
 
     // No UI changes when password matches during active input, 
     //  so that the user will try to confirm password again
-
 }
 
 console.log(overAllValidation);
@@ -384,6 +389,30 @@ console.log(overAllValidation);
 
 
 
+function submitForm(event) {
+    event.preventDefault();
+
+    const mouseDownEvent = new MouseEvent('mousedown', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+      const blurEvent = new MouseEvent('blur', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+    let inputs = document.querySelectorAll("form.create-account input");
+
+    inputs.forEach(input => {
+        input.dispatchEvent(blurEvent);
+    })
+
+
+    
+}
 
 
 
@@ -401,28 +430,6 @@ console.log(overAllValidation);
 
 
 
-
-//     function promptValidity(validity,object) {
-//         if (validity === true) {
-//            object["listIcon"].removeAttribute("class");
-//            object["listIcon"].classList.add("fa-regular", "fa-circle-check");
-//            object["listElement"].style.color = "#06FF00";
-//            object["passed"] = true;
-
-//         } else if (validity === "neutral") {
-//            object["listIcon"].removeAttribute("class");
-//            object["listIcon"].classList.add("fa-regular", "fa-circle-dot");
-//            object["listElement"].style.color = "var(--other-font-color)";
-//            object["passed"] = "neutral";
-           
-//        } else if (validity === false) {
-//            object["listIcon"].removeAttribute("class");
-//            object["listIcon"].classList.add("fa-regular", "fa-circle-xmark");
-//            object["listElement"].style.color = "#FF1700";
-//            object["passed"] = false;
-//        }
-
-//    }
 
 
 

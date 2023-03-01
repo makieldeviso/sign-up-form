@@ -10,8 +10,8 @@
     --form-bg-color: rgba(47, 53, 55, 0.7);
     --form-font-color: #FEDB39;
     --other-font-color: #E3F6FF;
-    --valid-color: #8BF5FA;
-    --invalid-color: red;
+    --valid-color: #06FF00;
+    --invalid-color: #FF1700;
 }
 
 
@@ -163,13 +163,13 @@ input {
 }
 
 input.valid {
-    border: 2px solid #1fe5f0;
-    box-shadow: 0 0 3px 2px var(--valid-color);
+    border: 2px solid #99a1a4;
+    box-shadow: 0 0 2px 2px var(--valid-color);
 }
 
 input.invalid {
-    border: 2px solid red;
-    box-shadow: 0 0 3px 2px var(--invalid-color);
+    border: 2px solid #99a1a4;
+    box-shadow: 0 0 2px 2px var(--invalid-color);
 }   
 
 .error-message, .guide {

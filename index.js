@@ -1,52 +1,49 @@
 const firstName = document.querySelector("#first-name");
-    firstName.addEventListener("click", clearStyling);
     firstName.addEventListener("blur", validateInputField);
 const lastName = document.querySelector("#last-name");
-    lastName.addEventListener("click", clearStyling);
     lastName.addEventListener("blur", validateInputField);
 const email = document.querySelector("#email");
-    email.addEventListener("click", clearStyling);
     email.addEventListener("blur", validateInputField);
-const phoneNumber = document.querySelector("#phone-number");
-    // phoneNumber.addEventListener("click", clearStyling);
+const phoneNumber = document.querySelector("#phone");
     phoneNumber.addEventListener("blur", validateInputField);
 const password = document.querySelector("#password");
-    password.addEventListener("click", validatePassword);
+    password.addEventListener("mousedown", validatePassword);
     password.addEventListener("input", validatePassword);
     password.addEventListener("blur", validatePassword);
 const confirmPassword = document.querySelector("#confirm-password");
+    confirmPassword.addEventListener("mousedown", validateConfirmPassword);
+    confirmPassword.addEventListener("input", validateConfirmPassword);
+    confirmPassword.addEventListener("blur", validateConfirmPassword);
 
 
-
-function CheckUserAction(status) {
-    this.status = status;
+let overAllValidation = [];
+function CheckUserAction(name, viewed) {
+    this.name = name;
+    this.viewed = viewed;
+    this.validity = false;
+    overAllValidation.push(this);
 }
-    let firstNameStatus = new CheckUserAction(false);
-    let lastNameStatus = new CheckUserAction(false);
-    let emailStatus = new CheckUserAction(false);
-    let phoneNumberStatus = new CheckUserAction(false);
-    let passwordStatus = new CheckUserAction(false);
-    let confirmPasswordStatus = new CheckUserAction(false);
+    let firstNameStatus = new CheckUserAction("firstName", false);
+    let lastNameStatus = new CheckUserAction("lastName", false);
+    let emailStatus = new CheckUserAction("email", false);
+    let phoneNumberStatus = new CheckUserAction("phoneNumber", false);
+    let passwordStatus = new CheckUserAction("password", false);
+    let confirmPasswordStatus = new CheckUserAction("confirmPassword", false);
 
 
-
-// const form = document.querySelector("form.create-account");
-//     form.addEventListener("submit", validateInput);
-
-
+// validates Other Input (start) -----------------
 function clearStyling() {
-        if (this.hasAttribute("class")) {
-            this.removeAttribute("class")
-        }
-    
+    if (this.hasAttribute("class")) {
+         this.removeAttribute("class")
+    }
+        
     this.nextElementSibling.style.display = "none";
-}
-
-
+    return;
+    }
 
 
 function validateInputField() {
-
+    
 //Gets the input element id as string and 
 //  checks what input field is being validated
     let inputField = `${"#" + this.id}`;  // Id Selector String
@@ -104,8 +101,9 @@ if (inputField === "#email") {
     }
 }
 
+
 // Validates phone Input Field
-if (inputField === "#phone-number") {
+if (inputField === "#phone") {
 // Remembers that the user has checked/viewed this input field
     inputFieldName.push(phoneNumberStatus);
 
@@ -123,10 +121,10 @@ if (inputField === "#phone-number") {
         errors.push("Reminder: phone number is optional");
     }
 }
- 
+
+
 // Removes error list
     function removeErrorList(field) {
-
         let newErrorList = document.querySelector(`${field} + ul`);
         let errorListNodes = newErrorList.querySelectorAll("li");
         
@@ -148,7 +146,7 @@ if (inputField === "#phone-number") {
             errorMessage.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> ${message}`
             // errorMessage.textContent = message;
             if (errorMessage.textContent.includes("Reminder")) {
-                errorMessage.innerHTML = `<i class="fa-solid fa-exclamation"></i> ${message}`
+                errorMessage.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${message}`
                 errorMessage.classList.add("reminder");
                 // Adds styling to reminder;
             }
@@ -162,6 +160,8 @@ if (inputField === "#phone-number") {
             inputElement.removeAttribute("class");
         }
         inputElement.classList.add("invalid");
+        inputFieldName[0]["validity"] = false;
+        
 
     } else if (errors.length === 0) {
         removeErrorList(inputField);
@@ -172,22 +172,34 @@ if (inputField === "#phone-number") {
             inputElement.removeAttribute("class");
         }
         inputElement.classList.add("valid");
+        inputFieldName[0]["validity"] = true;
+        
+        
     }
 
-    //Adds active input listening that guides user if 
+    // Adds active input listening that guides user if 
     // they already input in correct format, 
     // only triggers if the user has already checked field before
      
-    if (inputFieldName[0]["status"] === false) {
-        inputFieldName[0]["status"] = true;
+    if (inputFieldName[0]["viewed"] === false) {
+        inputFieldName[0]["viewed"] = true;
         inputElement.addEventListener("input", validateInputField);
+        inputElement.addEventListener("mousedown", clearStyling);
     }
-
+console.log(overAllValidation);
 }
 
+// validates Other Input (end) -----------------
 
 
 
+
+
+
+
+
+
+// Validates Password (start) -----------
 
 let listItemArray = [];
 function ListItem(listElement, listIcon) {
@@ -208,12 +220,12 @@ let specialCheck = new ListItem(document.querySelector("[data-check='special-cha
 let lengthCheck = new ListItem(document.querySelector("[data-check='length']"), 
     document.querySelector("[data-check='length'] i"));
 
-// let viewed = false;
+
 function validatePassword(event) {
     let guideList = document.querySelector(".guide");
     guideList.style.display = "unset";
 
-    if (event.type === "click") {
+    if (event.type === "mousedown") {
         if (this.hasAttribute("class")) {
             this.removeAttribute("class")
         }
@@ -241,25 +253,22 @@ function validatePassword(event) {
 
     }
 
-
-
 // Check if password has 1 number
     if (/(?=.*\d)/.test(this.value)) {
         promptValidity(true, numberCheck);
     } else {
-        if (event.type === "input" || event.type === "click") {
+        if (event.type === "input" || event.type === "mousedown") {
             promptValidity("neutral", numberCheck);
         } else if (event.type === "blur") {
             promptValidity(false, numberCheck);
         }
     }
-    console.log(numberCheck["viewed"]);
 
 // Check if password has 1 capital letter
     if (/(?=.*[A-Z])/.test(this.value)) {
         promptValidity(true, capitalCheck);
     } else {
-        if (event.type === "input" || event.type === "click") {
+        if (event.type === "input" || event.type === "mousedown") {
             promptValidity("neutral", capitalCheck);
         } else if (event.type === "blur") {
             promptValidity(false, capitalCheck);
@@ -270,7 +279,7 @@ function validatePassword(event) {
     if (/(?=.*[a-z])/.test(this.value)) {
         promptValidity(true, lowerCheck);
     } else {
-        if (event.type === "input" || event.type === "click") {
+        if (event.type === "input" || event.type === "mousedown") {
             promptValidity("neutral", lowerCheck);
         } else if (event.type === "blur") {
             promptValidity(false, lowerCheck);
@@ -281,7 +290,7 @@ function validatePassword(event) {
     if (/(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/.test(this.value)) {
         promptValidity(true, specialCheck);
     } else {
-        if (event.type === "input" || event.type === "click") {
+        if (event.type === "input" || event.type === "mousedown") {
             promptValidity("neutral", specialCheck);
         } else if (event.type === "blur") {
             promptValidity(false, specialCheck);
@@ -292,7 +301,7 @@ function validatePassword(event) {
 if (/.{8,}/.test(this.value)) {
     promptValidity(true, lengthCheck);
 } else {
-    if (event.type === "input" || event.type === "click") {
+    if (event.type === "input" || event.type === "mousedown") {
         promptValidity("neutral", lengthCheck);
     } else if (event.type === "blur") {
         promptValidity(false, lengthCheck);
@@ -304,18 +313,118 @@ if (/.{8,}/.test(this.value)) {
 
         listItemArray.forEach(item => {
             resultsArray.push(item["passed"]);
-        })
+        });
     
         if (resultsArray.includes(false) || resultsArray.includes("neutral")) {
             this.classList.add("invalid");
+            passwordStatus["validity"] = false;
         } else {
             this.classList.add("valid");
             guideList.style.display = "none";
+            passwordStatus["validity"] = true;
         }
-
+        console.log(resultsArray);
     }
     
+    console.log(overAllValidation);
 }
+// Validates Password (end) -----------
+
+
+
+// Validates Confirm Password (start) -----------
+let confirmInputElement = document.querySelector("[data-check='confirm']");
+function validateConfirmPassword(event) {
+    let errors = [];
+    let passwordInput = password.value;
+
+    if (event.type === "mousedown") {
+        password.addEventListener("input", activePassListening);
+    }
+
+    if (event.type === "blur") {
+        if (this.hasAttribute("class")) {
+            this.removeAttribute("class")
+        }
+
+        if (this.value != passwordInput && this.value.length != 0) {
+            confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Must match passwords`;
+            this.classList.add("invalid");
+            confirmPasswordStatus["validity"] = false;
+        } else if (this.value.length === 0 ) {
+            confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Enter password`;
+            this.classList.add("invalid");
+            confirmPasswordStatus["validity"] = false;
+        }else if (this.value.length != 0 && this.value === passwordInput) {
+            confirmInputElement.innerHTML = "";
+            this.classList.add("valid");
+            confirmPasswordStatus["validity"] = true;
+        }
+    }
+
+
+function activePassListening() {
+        
+    if (confirmPassword.value != password.value) {
+        if (confirmPassword.hasAttribute("class")) {
+            confirmPassword.removeAttribute("class")
+         }
+        
+        confirmInputElement.innerHTML = "";
+    }
+
+    // No UI changes when password matches during active input, 
+    //  so that the user will try to confirm password again
+
+}
+
+console.log(overAllValidation);
+}
+// Validates Confirm Password (end) -----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     function promptValidity(validity,object) {
+//         if (validity === true) {
+//            object["listIcon"].removeAttribute("class");
+//            object["listIcon"].classList.add("fa-regular", "fa-circle-check");
+//            object["listElement"].style.color = "#06FF00";
+//            object["passed"] = true;
+
+//         } else if (validity === "neutral") {
+//            object["listIcon"].removeAttribute("class");
+//            object["listIcon"].classList.add("fa-regular", "fa-circle-dot");
+//            object["listElement"].style.color = "var(--other-font-color)";
+//            object["passed"] = "neutral";
+           
+//        } else if (validity === false) {
+//            object["listIcon"].removeAttribute("class");
+//            object["listIcon"].classList.add("fa-regular", "fa-circle-xmark");
+//            object["listElement"].style.color = "#FF1700";
+//            object["passed"] = false;
+//        }
+
+//    }
+
+
 
 
 

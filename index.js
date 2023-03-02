@@ -17,23 +17,27 @@ const confirmPassword = document.querySelector("#confirm-password");
     confirmPassword.addEventListener("input", validateConfirmPassword);
     confirmPassword.addEventListener("blur", validateConfirmPassword);
 
+const terms = document.querySelector("input#terms");
+    terms.addEventListener("change", validatesTerms);
+
 const form = document.querySelector("form.create-account");
     form.addEventListener("submit", submitForm);
 
 let overAllValidation = []; // Saves status of input fields
-function CheckUserAction(name, viewed, inputField) {
+function CheckUserAction(name, inputField) {
     this.name = name;
-    this.viewed = viewed;
+    this.viewed = false;
     this.inputField = inputField;
     this.validity = false;
     overAllValidation.push(this);
 }
-    let firstNameStatus = new CheckUserAction("firstName", false, firstName);
-    let lastNameStatus = new CheckUserAction("lastName", false, lastName);
-    let emailStatus = new CheckUserAction("email", false, email);
-    let phoneNumberStatus = new CheckUserAction("phoneNumber", false, phoneNumber);
-    let passwordStatus = new CheckUserAction("password", false, password);
-    let confirmPasswordStatus = new CheckUserAction("confirmPassword", false, confirmPassword);
+    let firstNameStatus = new CheckUserAction("firstName", firstName);
+    let lastNameStatus = new CheckUserAction("lastName", lastName);
+    let emailStatus = new CheckUserAction("email", email);
+    let phoneNumberStatus = new CheckUserAction("phoneNumber", phoneNumber);
+    let passwordStatus = new CheckUserAction("password", password);
+    let confirmPasswordStatus = new CheckUserAction("confirmPassword", confirmPassword);
+    let termsStatus = new CheckUserAction("terms", terms);
 
 // Validates Other Input (start) -----------------
 //  Clears styling upon click to input field (UI related) 
@@ -374,6 +378,22 @@ console.log(overAllValidation);
 // Validates Confirm Password (end) -----------
 
 
+// Validates Accept Terms and Conditions (start) ------------
+function validatesTerms() {
+    let termsError = document.querySelector(`div#terms-div ul`);
+    termsError.style.display = "none";
+
+    if (terms.checked) {
+        termsStatus["validity"] = true;
+    } else {
+        termsStatus["validity"] = false;
+    }
+    console.log(termsStatus);
+}
+
+// Validates Accept Terms and Conditions (end) ------------
+
+
 // Validate and Submit (start) ----------------
 function submitForm(event) {
     // Construct mouse event to simulates blur event when submit button is clicked.
@@ -400,6 +420,16 @@ function submitForm(event) {
             return true; // Break loop when first instance of error is detected
         }
     });
+
+    // Adds Error List to Terms if unchecked
+    if (termsStatus["validity"] === false) {
+        let termsErrorList = document.querySelector(`[data-check="terms-accept"]`); 
+        termsErrorList.classList.add("invalid");
+        termsErrorList.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Kindly accept the terms and conditions to continue`;
+        termsErrorList.parentElement.style.display = "unset";
+        console.log(termsErrorList);
+    }
+
 
     let firstInstanceError = document.querySelector(jumpFocus);
     firstInstanceError.scrollIntoView({behavior: "smooth", block: "center"});

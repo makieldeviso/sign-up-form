@@ -7,12 +7,18 @@
     --main-font: 'Montserrat', sans-serif;
     --label-and-input-margin: 5%;
     --input-and-error-width: 90%;
-    --label-and-input-fontSize: 1rem;
+    
     --form-bg-color: rgba(47, 53, 55, 0.7);
     --form-font-color: #FEDB39;
     --other-font-color: #E3F6FF;
     --valid-color: #06FF00;
     --invalid-color: #FF1700; 
+
+    /* font-sizes */
+    --label-and-input-fontSize: calc(0.4rem + 1vw);
+    --title-fontSize: calc(0.5rem + 1vw);
+
+
 }
 
 
@@ -74,6 +80,7 @@ div#hero-image .background {
 #hero-image img#banner {
     margin: 0 auto;
     width: 100%;
+    max-height: 90%;
     z-index: 1;
     background: linear-gradient(0.75turn, 
         rgba(0, 0, 0, 0.4), 
@@ -113,20 +120,20 @@ div#form-main {
     background-color: var(--form-bg-color);
     margin: auto;
     width: 95%;
-    padding: 5px;
+    padding: calc(5px + 1vw);
 }
 
 #create-account p {
-    font-size: 1.3rem;
-    margin: 15px auto;
+    font-size: var(--title-fontSize);
+    margin: calc(10px + 1vw) auto;
     color: var(--other-font-color);
 }
 
 .input-div {
-    padding: 3px;
+    padding: calc(0.5px + 0.5vw);
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: calc(5px + 2vw);
 }
 
 .input-div:last-of-type {
@@ -134,7 +141,7 @@ div#form-main {
 }
 
 .input-div label {
-    margin: 5px 0;
+    margin: calc(0.5px + 0.5vw) 0;
     text-align: left;
     margin-left: var(--label-and-input-margin);
     font-size: var(--label-and-input-fontSize);
@@ -147,7 +154,7 @@ span.optional {
 
 input {
     display: block;
-    margin: 5px var(--label-and-input-margin);
+    margin: calc(0.5px + 0.5vw) var(--label-and-input-margin);
     width: var(--input-and-error-width);
     font-size: var(--label-and-input-fontSize);
     padding: 5px;
@@ -167,7 +174,7 @@ input.invalid {
 .error-message, .guide {
     list-style-type: none;
     color: #EB455F;
-    font-size: calc(0.7 * var(--label-and-input-fontSize));
+    font-size: calc(0.9 * var(--label-and-input-fontSize));
     text-align: left;
     margin-left: var(--label-and-input-margin);
     vertical-align: middle;
@@ -176,8 +183,13 @@ input.invalid {
     text-indent: -7px;
     background-color: rgba(123, 143, 161, 0.2);
     display: none;
+    margin-top: 5px;
+    border-radius: 6px;
 }
 
+li {
+    margin: calc(5px + 0.1vw) 0;
+}
 
 .guide {
     display: none;
@@ -190,16 +202,48 @@ input.invalid {
 }
 
 button[type="submit"] {
-    margin: 15px;
-    width: max-content;
+    margin: calc(1px + 1vw);
+    width: 60%;
     padding: 5px;
-    font-size: var(--label-and-input-fontSize);
+    font-size: calc(var(--label-and-input-fontSize) + 0.5vw);
+    font-weight: bold;
+    background-color: var(--form-font-color);
+    border-radius: 5px;
+    color: #020100;
+    border: 3px solid #F9F54B;
 }
 
-#create-account .button-div p {
-    font-size: 1rem;
+button[type="submit"]:hover {
+    box-shadow: 0 0 10px 2px rgba(14, 245, 233, 0.5);
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+#log-in p, #log-in a {
+    font-size: calc(0.5rem + 1vw);
     margin: 5px;
     display: inline-block;
 }
 
+#log-in a {
+    text-decoration: none;
+    color: #e6d796;
+    margin-left: 0;
+}
+#log-in a:visited {
+    color: #e6d796;
+}
+#log-in a:hover,
+#log-in a:focus {
+    color: #F9F54B;
+}
+#log-in a:active {
+    color: #F9F54B;;
+}
 
+
+div#log-in {
+    margin: calc(5px + 1vw) 0 0 ;
+}

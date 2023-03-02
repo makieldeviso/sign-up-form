@@ -21,18 +21,19 @@ const form = document.querySelector("form.create-account");
     form.addEventListener("submit", submitForm);
 
 let overAllValidation = []; // Saves status of input fields
-function CheckUserAction(name, viewed) {
+function CheckUserAction(name, viewed, inputField) {
     this.name = name;
     this.viewed = viewed;
+    this.inputField = inputField;
     this.validity = false;
     overAllValidation.push(this);
 }
-    let firstNameStatus = new CheckUserAction("firstName", false);
-    let lastNameStatus = new CheckUserAction("lastName", false);
-    let emailStatus = new CheckUserAction("email", false);
-    let phoneNumberStatus = new CheckUserAction("phoneNumber", false);
-    let passwordStatus = new CheckUserAction("password", false);
-    let confirmPasswordStatus = new CheckUserAction("confirmPassword", false);
+    let firstNameStatus = new CheckUserAction("firstName", false, firstName);
+    let lastNameStatus = new CheckUserAction("lastName", false, lastName);
+    let emailStatus = new CheckUserAction("email", false, email);
+    let phoneNumberStatus = new CheckUserAction("phoneNumber", false, phoneNumber);
+    let passwordStatus = new CheckUserAction("password", false, password);
+    let confirmPasswordStatus = new CheckUserAction("confirmPassword", false, confirmPassword);
 
 // Validates Other Input (start) -----------------
 //  Clears styling upon click to input field (UI related) 
@@ -391,12 +392,18 @@ function submitForm(event) {
     });
 
     // Checks the saved validations if all inputs values has passed
-    overAllValidation.forEach(validation => {
+    let jumpFocus = ""; // Save here the first instance of Error
+    overAllValidation.some(validation => {
         if (validation["validity"] === false) {
             event.preventDefault();
-            return;
+            jumpFocus = `${"#" + validation["inputField"].getAttribute("id")}`;
+            return true; // Break loop when first instance of error is detected
         }
     });
+
+    let firstInstanceError = document.querySelector(jumpFocus);
+    firstInstanceError.scrollIntoView({behavior: "smooth", block: "center"});
+
 }
 // Validate and Submit (end) ----------------
 

@@ -5,15 +5,14 @@
     --footer-height: 5vh;
     --title-font: 'Montserrat', sans-serif;
     --main-font: 'Montserrat', sans-serif;
-    --label-and-input-margin: 8%;
-    --input-and-error-width: 84%;
+    --label-and-input-margin: 5%;
+    --input-and-error-width: 90%;
     --label-and-input-fontSize: 1rem;
     --form-bg-color: rgba(47, 53, 55, 0.7);
     --form-font-color: #FEDB39;
     --other-font-color: #E3F6FF;
     --valid-color: #06FF00;
-    --invalid-color: #FF1700;
-    
+    --invalid-color: #FF1700; 
 }
 
 
@@ -24,20 +23,18 @@
     font-family: var(--main-font);
 }
 
-
 header {
     height: var(--header-height);
     background-color: var(--form-bg-color);
 }
 main {
-    padding: 10px;
+    /* padding: 10px; */
     text-align: center;
     height: calc(100vh - var(--footer-height) - var(--header-height))
 }
 
 footer {
-    height: var(--footer-height);
-    
+    height: var(--footer-height);   
 }
 
 div#hero-image {
@@ -163,7 +160,7 @@ input.valid {
 }
 
 input.invalid {
-    border: 2px solid #99a1a4;
+    border: 2px solid rgb(153, 161, 164);
     box-shadow: 0 0 2px 2px var(--invalid-color);
 }   
 
@@ -175,15 +172,12 @@ input.invalid {
     margin-left: var(--label-and-input-margin);
     vertical-align: middle;
     width: var(--input-and-error-width);
-    padding-left: 0.8rem;
-    text-indent: -0.45rem;
+    padding: 5px 5px 5px 20px;
+    text-indent: -7px;
+    background-color: rgba(123, 143, 161, 0.2);
+    display: none;
 }
 
-/* .error-message i, .guide i {
-    vertical-align: middle;
-    margin-right: 3px;
-    
-} */
 
 .guide {
     display: none;

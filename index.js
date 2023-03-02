@@ -170,6 +170,7 @@ if (inputField === "#phone") {
             inputElement.removeAttribute("class");
         }
         inputElement.classList.add("valid");
+        errorList.style.display = "none";
         inputFieldName[0]["validity"] = true; // Saves validity to global object
     }
 
@@ -338,26 +339,20 @@ function validateConfirmPassword(event) {
             this.removeAttribute("class")
         }
 
-        function validate(validity) { // Reusable function
-            if (validity === false) {
-                this.classList.add("invalid");
-                confirmPasswordStatus["validity"] = false;
-                this.nextElementSibling.style.display = "unset";
-            } else if (validity === true) {  
-                this.classList.add("valid");
-                confirmPasswordStatus["validity"] = true;
-            }
-        }
-
         if (this.value != passwordInput && this.value.length != 0) {
             confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Must match passwords`;
-            validate(false);
+            confirmPasswordStatus["validity"] = false;
+            this.classList.add("invalid");
+            this.nextElementSibling.style.display = "unset";
         } else if (this.value.length === 0 ) {
             confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Enter password`;
-            validate(false);
+            confirmPasswordStatus["validity"] = false;
+            this.classList.add("invalid");
+            this.nextElementSibling.style.display = "unset";
         }else if (this.value.length != 0 && this.value === passwordInput) {
             confirmInputElement.innerHTML = "";
-            validate(true);
+            this.classList.add("valid");
+            confirmPasswordStatus["validity"] = true;
         }
         console.log(this);
     }

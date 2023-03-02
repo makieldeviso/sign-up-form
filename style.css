@@ -5,13 +5,15 @@
     --footer-height: 5vh;
     --title-font: 'Montserrat', sans-serif;
     --main-font: 'Montserrat', sans-serif;
-    --label-and-input-margin: 10%;
+    --label-and-input-margin: 8%;
+    --input-and-error-width: 84%;
     --label-and-input-fontSize: 1rem;
     --form-bg-color: rgba(47, 53, 55, 0.7);
     --form-font-color: #FEDB39;
     --other-font-color: #E3F6FF;
     --valid-color: #06FF00;
     --invalid-color: #FF1700;
+    
 }
 
 
@@ -117,15 +119,6 @@ div#form-main {
     padding: 5px;
 }
 
-
-
-/* #hero-image h1 {
-    font-family: var(--title-font);
-    font-size: 2rem;
-    color: var(--other-font-color);
-    z-index: 1;
-} */
-
 #create-account p {
     font-size: 1.3rem;
     margin: 15px auto;
@@ -144,6 +137,7 @@ div#form-main {
 }
 
 .input-div label {
+    margin: 5px 0;
     text-align: left;
     margin-left: var(--label-and-input-margin);
     font-size: var(--label-and-input-fontSize);
@@ -157,9 +151,10 @@ span.optional {
 input {
     display: block;
     margin: 5px var(--label-and-input-margin);
-    width: 80%;
+    width: var(--input-and-error-width);
     font-size: var(--label-and-input-fontSize);
     padding: 5px;
+    background-color: #ECF9FF;
 }
 
 input.valid {
@@ -179,12 +174,16 @@ input.invalid {
     text-align: left;
     margin-left: var(--label-and-input-margin);
     vertical-align: middle;
-    /* padding-left: 0.5em; */
+    width: var(--input-and-error-width);
+    padding-left: 0.8rem;
+    text-indent: -0.45rem;
 }
 
-.error-message i, .guide i {
+/* .error-message i, .guide i {
     vertical-align: middle;
-}
+    margin-right: 3px;
+    
+} */
 
 .guide {
     display: none;

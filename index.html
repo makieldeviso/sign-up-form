@@ -27,86 +27,96 @@
             <p>Create your account</p>
             <form action="" method="" class="create-account" novalidate>
                 <div id="form-main">
-                    <div class="input-div">
-                        <label for="first-name">First Name</label>
-                        <input type="text" 
-                            id="first-name" 
-                            name="first-name">
-                        <ul class="error-message"></ul>
+                    <div class="names"> 
+                        <div class="input-div">
+                            <label for="first-name">First Name</label>
+                            <input type="text" 
+                                id="first-name" 
+                                name="first-name">
+                            <ul class="error-message"></ul>
+                        </div>
+                        
+                        <div class="input-div">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" 
+                                id="last-name" 
+                                name="last-name">
+                            <ul class="error-message"></ul>
+                        </div>
                     </div>
                     
-                    <div class="input-div">
-                        <label for="first-name">Last Name</label>
-                        <input type="text" 
-                            id="last-name" 
-                            name="last-name">
-                        <ul class="error-message"></ul>
+                    <div class="contact">
+                        <div class="input-div">
+                            <label for="email">Email Address</label>
+                            <input type="email"
+                                id="email"
+                                name="email"
+                                placeholder="example@gmail.com">
+                            <ul class="error-message"></ul>
+                        </div>
+        
+                        <div class="input-div">
+                            <label for="phone">Phone Number <span class="optional">. Optional</span></label>
+                            <input type="tel"
+                                id="phone"
+                                name="phone">
+                            <ul class="error-message"></ul>
+                        </div>
                     </div>
                     
-                    <div class="input-div">
-                        <label for="email">Email Address</label>
-                        <input type="email"
-                            id="email"
-                            name="email"
-                            placeholder="example@gmail.com">
-                        <ul class="error-message"></ul>
+                    <div class="pass">
+                        <div class="input-div">
+                            <label for="password">Password</label>
+                            <input type="password"
+                                id="password"
+                                name="password">
+                            <ul class="guide">
+                                <li data-check="length"><i class="fa-regular fa-circle-dot"></i> Must be at least 8 characters </li>
+                                <li data-check="number"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 number</li>
+                                <li data-check="capital"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 capital letter</li>
+                                <li data-check="lower"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 letter in lower case</li>
+                                <li data-check="special-char"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 special character</li>
+                            </ul>
+                            <ul class="error-message"></ul>
+                        </div>
+        
+                        <div class="input-div">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password"
+                                id="confirm-password"
+                                name="confirm-password">
+                            <ul class="error-message">
+                                <li data-check="confirm"></li>
+                            </ul>
+                        </div>
+
                     </div>
+                    
+                    
+                        <div id="terms-div" class="input-div">
+                            <div id="terms-field">
+                                <input type="checkbox"
+                                    id="terms"
+                                    name="terms"
+                                    value="accept">
+                                <label id="terms-label" for="terms">I Agree to the <a href="/">WarYur Dev. Terms and Conditions</a> </label>
+                            </div>
+                            
+                            <ul class="error-message">
+                                <li data-check="terms-accept"></li>
+                            </ul>
+                        </div>
     
-                    <div class="input-div">
-                        <label for="phone">Phone Number <span class="optional">. Optional</span></label>
-                        <input type="tel"
-                            id="phone"
-                            name="phone">
-                        <ul class="error-message"></ul>
-                    </div>
-    
-                    <div class="input-div">
-                        <label for="password">Password</label>
-                        <input type="password"
-                            id="password"
-                            name="password">
-                        <ul class="guide">
-                            <li data-check="length"><i class="fa-regular fa-circle-dot"></i> Must be at least 8 characters </li>
-                            <li data-check="number"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 number</li>
-                            <li data-check="capital"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 capital letter</li>
-                            <li data-check="lower"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 letter in lower case</li>
-                            <li data-check="special-char"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 special character</li>
-                        </ul>
-                        <ul class="error-message"></ul>
-                    </div>
-    
-                    <div class="input-div">
-                        <label for="confirm-password">Confirm Password</label>
-                        <input type="password"
-                            id="confirm-password"
-                            name="confirm-password">
-                        <ul class="error-message">
-                            <li data-check="confirm"></li>
-                        </ul>
-                    </div>
-
-                    <div id="terms-div" class="input-div">
-                        <input type="checkbox"
-                            id="terms"
-                            name="terms"
-                            value="accept">
-                        <label id="terms-label" for="terms">I Agree to the <a href="/">WarYur Dev. Terms and Conditions</a> </label>
-                        <ul class="error-message">
-                            <li data-check="terms-accept"></li>
-                        </ul>
-                    </div>
-
-                    <div class="button-div">
-                        <button id="submit-button" type="submit">Create Account</button>
-                    </div>
-
-                    <div id="log-in">
-                        <p>Already have an account?</p>
-                        <a id="sign-in" href="">Log in</a>
-                    </div>
-                </div>
-
-                
+                        
+                            <div class="button-div">
+                                <button id="submit-button" type="submit">Create Account</button>
+                            </div>
+        
+                            <div id="log-in">
+                                <p>Already have an account?</p>
+                                <a id="sign-in" href="">Log in</a>
+                            </div>
+                </div> 
             </form>
             
         </div>

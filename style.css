@@ -7,6 +7,7 @@
     --main-font: 'Montserrat', sans-serif;
     --label-and-input-margin: 5%;
     --input-and-error-width: 90%;
+    --hero-image-div-height: calc(10% + 10vw);
     
     --form-bg-color: rgba(47, 53, 55, 0.7);
     --form-font-color: #FEDB39;
@@ -20,8 +21,9 @@
 
 
 }
+
 body {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 * {
@@ -42,7 +44,7 @@ header {
 main {
     text-align: center;
     padding-top: var(--header-height);
-    min-height: calc(100% - var(--footer-height));
+    min-height: calc(100vh - var(--footer-height));
     background-image: url("./images/background.jpg");
     background-size: cover;
     background-position: center;
@@ -55,7 +57,7 @@ footer {
 }
 
 div#hero-image {
-    height: calc(10% + 10vw);
+    height: var(--hero-image-div-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -121,7 +123,8 @@ div#hero-image .background {
 
 div#create-account {
     width: 100%;
-    height: max-content;
+    min-height: max-content;
+    height: 100%;
     padding: 5px 5px 20px;
 }
 
@@ -136,6 +139,7 @@ div#form-main {
     font-size: var(--title-fontSize);
     margin: calc(10px + 1vw) auto;
     color: var(--other-font-color);
+    text-shadow: 0 0 3px var(--form-font-color);
 }
 
 .input-div {
@@ -145,9 +149,6 @@ div#form-main {
     margin-bottom: calc(5px + 2vw);
 }
 
-.input-div:last-of-type {
-    margin-bottom: 0;
-}
 
 .input-div label {
     margin: calc(0.5px + 0.5vw) 0;
@@ -160,7 +161,6 @@ span.optional {
     font-style: italic;
     font-size: calc(0.8 * var(--label-and-input-fontSize));
 }
-
 
 
 input {
@@ -188,9 +188,18 @@ input#terms,  label#terms-label {
 }
 
 div#terms-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+div#terms-field {
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
+    width: 95%;
 }
 
 label#terms-label {
@@ -227,9 +236,6 @@ input#terms:focus {
 
 div#terms-div ul {
     display: none;
-    flex: 0 0 var(--input-and-error-width);
-    /* the ul flex basis is equal to the width of the input fields */
-    /* which should align with the allocated area for the error list */
 }
 
 .error-message, .guide {
@@ -242,7 +248,7 @@ div#terms-div ul {
     width: var(--input-and-error-width);
     padding: 5px 5px 5px 20px;
     text-indent: -7px;
-    background-color: rgba(123, 143, 161, 0.2);
+    background-color: rgba(123, 143, 161, 0.1);
     display: none;
     margin-top: 5px;
     border-radius: 6px;
@@ -283,25 +289,10 @@ button[type="submit"]:active {
 
 #log-in p, #log-in a {
     font-size: calc(0.5rem + 1vw);
+    text-shadow: none;
     margin: 5px;
     display: inline-block;
 }
-
-/* #log-in a {
-    text-decoration: none;
-    color: #e6d796;
-    margin-left: 0;
-}
-#log-in a:visited {
-    color: #e6d796;
-}
-#log-in a:hover,
-#log-in a:focus {
-    color: #F9F54B;
-}
-#log-in a:active {
-    color: #F9F54B;
-} */
 
 a {
     text-decoration: none;
@@ -321,4 +312,149 @@ a:active {
 
 div#log-in {
     margin: calc(5px + 1vw) 0 0 ;
+}
+
+
+
+
+
+
+@media only screen and (min-width: 1000px) {
+    :root {
+        --header-height: 3vh; 
+        --footer-height: 3vh;
+
+        --label-and-input-margin: 3%;
+    
+        /* font-sizes */
+        --label-and-input-fontSize: calc(0.5rem + 0.5vw);
+        --title-fontSize: calc(0.7rem + 0.5vw);
+    }
+
+
+    main {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        /* min-height: calc(100vh - var(--footer-height)); */
+        height: calc(100vh - var(--footer-height));
+        overflow: auto;
+    }
+
+    div#hero-image {
+        width: 40%;
+        height: 100%;
+        align-self: stretch;
+    }
+
+    div#hero-image .background {
+        height: 100%;
+        background: linear-gradient(0.25turn, 
+            black, 
+            black,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.3));
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #hero-image img#model {
+        height: unset;
+        width: 60%;
+        max-width: 500px;
+    }
+
+    #hero-image img#banner {
+        margin: 0px auto;
+        width: 100%;
+        max-height: 90%;
+        z-index: 1;
+        background: linear-gradient(0.75turn, 
+            rgba(0, 0, 0, 0.4), 
+            black);
+        padding: 5px 4%;
+    }
+
+    form.create-account {
+        height: max-content; 
+    }
+
+    div#create-account {
+        width: 60%;
+        height: 100%;
+    }
+
+    #create-account p {
+        font-size: var(--title-fontSize);
+        margin: 5px 0 10px;
+    }
+
+    div#form-main {
+        padding: 5px;
+        padding-left: 15px;
+        height: 100%;
+        min-height: max-content;
+    }
+
+    div.names, div.contact, div.pass {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .input-div {
+        padding: calc(1px + 0.3vw);
+        margin-bottom: 5px;
+        flex: 1;
+    }
+
+    .input-div label {
+        margin: 3px;
+        margin-left: var(--label-and-input-margin);
+        margin-right: var(--label-and-input-margin);
+    }
+
+    input {
+        margin: 3px var(--label-and-input-margin);
+        padding: 3px;
+    }
+
+    .error-message, .guide {
+        padding: 3px 3px 3px 20px;
+    }
+    
+    li {
+        margin: 2px 0;
+    }
+
+    div#terms-div input {
+        margin-left: calc(var(--label-and-input-margin)/ 2);
+    }
+
+    div#terms-div ul {
+        margin-left: calc(var(--label-and-input-margin) / 2);
+        width: max-content;
+    }
+
+    div#terms-div ul li {
+        margin-right: calc(20px + 1vw);
+    }
+
+    button[type="submit"] {
+        margin: 30px 5px 5px;  
+        font-size: var(--label-and-input-fontSize);
+        width: max-content;
+        padding: 5px 5%;
+    }
+
+    div#log-in {
+        margin: 3px  0 0;
+    }
+
+    #log-in p, #log-in a {
+        font-size: var(--label-and-input-fontSize);
+        margin: 3px;
+        display: inline-block;
+    }
 }

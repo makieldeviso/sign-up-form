@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Work+Sans:wght@300&display=swap');
 
 :root {
-    --header-height: 5vh;
+    --header-height: 3vh;
     --footer-height: 5vh;
     --title-font: 'Montserrat', sans-serif;
     --main-font: 'Montserrat', sans-serif;
@@ -15,12 +15,14 @@
     --invalid-color: #FF1700; 
 
     /* font-sizes */
-    --label-and-input-fontSize: calc(0.4rem + 1vw);
-    --title-fontSize: calc(0.5rem + 1vw);
+    --label-and-input-fontSize: calc(0.4rem + 1.5vw);
+    --title-fontSize: calc(0.6rem + 1.5vw);
 
 
 }
-
+body {
+    height: 100vh;
+}
 
 * {
     margin: 0;
@@ -31,20 +33,29 @@
 
 header {
     height: var(--header-height);
+    width: 100%;
     background-color: var(--form-bg-color);
+    display: block;
+    position: fixed;
+    top: 0;
 }
 main {
-    /* padding: 10px; */
     text-align: center;
-    height: calc(100vh - var(--footer-height) - var(--header-height))
+    padding-top: var(--header-height);
+    min-height: calc(100% - var(--footer-height));
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 footer {
-    height: var(--footer-height);   
+    height: var(--footer-height); 
+    width: 100%;
+    background: rgba(252, 226, 42, 0.8);
 }
 
 div#hero-image {
-    height: 20vh;
+    height: calc(10% + 10vw);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,8 +63,7 @@ div#hero-image {
     background-image: url("./images/cityscape.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center bottom;
-    
+    background-position: center bottom;  
 }
 
 div#hero-image .background {
@@ -99,6 +109,7 @@ div#hero-image .background {
     text-align: right;
     text-shadow: 0 0 3px black;
     font-style: italic;
+    font-size: calc(1rem + 1vw);
     background: linear-gradient(0.75turn, 
         rgba(249, 245, 75, 0.7), 
         rgba(139, 245, 250, 0.5), 
@@ -110,10 +121,8 @@ div#hero-image .background {
 
 div#create-account {
     width: 100%;
-    background-image: url("./images/background.jpg");
-    background-size: cover;
-    background-position: center;
-    padding: 5px;
+    height: max-content;
+    padding: 5px 5px 20px;
 }
 
 div#form-main {

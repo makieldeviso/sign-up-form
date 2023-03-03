@@ -432,6 +432,11 @@ div#log-in {
         margin-left: calc(var(--label-and-input-margin)/ 2);
     }
 
+    div#terms-div label {
+        width: max-content;
+        flex: unset;
+    }
+
     div#terms-div ul {
         margin-left: calc(var(--label-and-input-margin) / 2);
         width: max-content;

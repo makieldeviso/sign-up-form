@@ -43,10 +43,6 @@ header {
     padding: 3px;
 }
 
-header:hover {
-    height: calc(var(--header-height) * 1.1);
-    background-color: rgba(47, 53, 55, 0.9);
-}
 
 main {
     text-align: center;
@@ -66,6 +62,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 header ul.other-links {
@@ -79,6 +76,24 @@ header ul.other-links li {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+    /* padding: 0 30px 0 10px; */
+    padding: 0 calc(10px + 1vw) 0 calc(5px + 1vw);
+    /* margin: auto 20px auto 10px; */
+    margin: auto calc(5px + 1vw) auto 0;
+    border-right: 2px solid #99a1a4;
+}
+
+header:hover ul.other-links li,
+header:focus ul.other-links li{
+    /* padding: 0 40px 0 20px; */
+    padding: 0 calc(10px + 1vw) 0 calc(5px + 1vw);
+}
+
+/* header ul.other-links li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 95%;
     padding: 0 30px 0 10px;
     margin: auto 20px auto 10px;
@@ -88,28 +103,31 @@ header ul.other-links li {
 header:hover ul.other-links li,
 header:focus ul.other-links li{
     padding: 0 40px 0 20px;
-    /* margin: auto 20px auto 10px; */
-}
+} */
 
 header ul.other-links a{
-    height: inherit;   
+    height: inherit; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;  
 }
 
 header ul.other-links a img{
-    height: 100%;
+    height: calc(50% + 0.5vw);
     filter: invert(1) opacity(0.3);
 }
 
-header:hover ul.other-links a img,
+/* header:hover ul.other-links a img,
 header:focus ul.other-links a img {
     filter: invert(0.8) opacity(1);
-}
+} */
 
 header ul.other-links a img:hover,
 header ul.other-links a img:focus{
     filter: invert(1);
     transform: scale(1.1);
 }
+
 
 div#hero-image {
     height: var(--hero-image-div-height);
@@ -592,6 +610,34 @@ footer a:active {
         /* font-sizes */
         --label-and-input-fontSize: calc(0.5rem + 0.5vw);
         --title-fontSize: calc(0.7rem + 0.5vw);
+    }
+
+    header:hover {
+        height: calc(var(--header-height) * 1.1);
+        background-color: rgba(47, 53, 55, 0.9);
+    }
+
+    header ul.other-links {
+        display: flex;
+        list-style-type: none;
+        align-items: center;
+        height: 100%;
+    }
+    
+    header:hover ul.other-links li,
+    header:focus ul.other-links li{
+        padding: 0 40px 0 20px;
+    }
+        
+    header:hover ul.other-links a img,
+    header:focus ul.other-links a img {
+        filter: invert(0.8) opacity(1);
+    }
+    
+    header ul.other-links a img:hover,
+    header ul.other-links a img:focus{
+        filter: invert(1);
+        transform: scale(1.1);
     }
 
     main {

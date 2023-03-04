@@ -18,8 +18,6 @@
     /* font-sizes */
     --label-and-input-fontSize: calc(0.4rem + 1.5vw);
     --title-fontSize: calc(0.6rem + 1.5vw);
-
-
 }
 
 body {
@@ -31,6 +29,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: var(--main-font);
+    transition: all 0.1s ease-in-out;
 }
 
 header {
@@ -40,7 +39,15 @@ header {
     display: block;
     position: fixed;
     top: 0;
+    z-index: 2;
+    padding: 3px;
 }
+
+header:hover {
+    height: calc(var(--header-height) * 1.1);
+    background-color: rgba(47, 53, 55, 0.9);
+}
+
 main {
     text-align: center;
     padding-top: var(--header-height);
@@ -53,7 +60,55 @@ main {
 footer {
     height: var(--footer-height); 
     width: 100%;
-    background: rgba(252, 226, 42, 0.8);
+    background-color: var(--form-font-color);
+    text-align: center;
+    padding-right: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header ul.other-links {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    height: 100%;
+}
+
+header ul.other-links li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 95%;
+    padding: 0 30px 0 10px;
+    margin: auto 20px auto 10px;
+    border-right: 2px solid #99a1a4;
+}
+
+header:hover ul.other-links li,
+header:focus ul.other-links li{
+    padding: 0 40px 0 20px;
+    /* margin: auto 20px auto 10px; */
+}
+
+header ul.other-links a{
+    height: inherit;   
+}
+
+header ul.other-links a img{
+    height: 100%;
+    filter: invert(1) opacity(0.3);
+}
+
+header:hover ul.other-links a img,
+header:focus ul.other-links a img {
+    filter: invert(0.8) opacity(1);
+}
+
+header ul.other-links a img:hover,
+header ul.other-links a img:focus{
+    filter: invert(1);
+    transform: scale(1.1);
 }
 
 div#hero-image {
@@ -79,7 +134,6 @@ div#hero-image .background {
     flex-direction: column;
     justify-content: center;
 }
-
 
 #hero-image img#model {
     position: absolute;
@@ -149,7 +203,6 @@ div#form-main {
     margin-bottom: calc(5px + 2vw);
 }
 
-
 .input-div label {
     margin: calc(0.5px + 0.5vw) 0;
     text-align: left;
@@ -162,12 +215,12 @@ span.optional {
     font-size: calc(0.8 * var(--label-and-input-fontSize));
 }
 
-
 input {
     display: block;
     margin: calc(0.5px + 0.5vw) var(--label-and-input-margin);
     width: var(--input-and-error-width);
     font-size: var(--label-and-input-fontSize);
+    font-weight: bold;
     padding: 5px;
     background-color: #ECF9FF;
 }
@@ -192,7 +245,6 @@ div#terms-div {
     flex-direction: column;
     align-items: flex-start;
 }
-
 
 div#terms-field {
     display: flex;
@@ -294,7 +346,7 @@ button[type="submit"]:active {
     display: inline-block;
 }
 
-a {
+a{
     text-decoration: none;
     color: #e6d796;
     margin-left: 0;
@@ -314,16 +366,227 @@ div#log-in {
     margin: calc(5px + 1vw) 0 0 ;
 }
 
+footer p {
+    margin: 0 5px;
+    text-align: left;
+    font-size: calc(0.5rem + 0.5vw);
+    display: inline-block;
+    font-weight: bold;
+}
 
+footer a{
+    text-decoration: none;
+    color: #020100;
+    margin-left: 0;
+}
+footer a:visited {
+    color: #020100;
+}
+footer a:hover,
+footer a:focus {
+    color: #7e7979;
+}
+footer a:active {
+    color: #7e7979;
+}
 
+@media only screen and (min-width: 750px) and (min-height: 600px) {
+    :root {
+        --header-height: 3vh; 
+        --footer-height: 3vh;
+        --label-and-input-margin: 3%;
+    
+        /* font-sizes */
+        --label-and-input-fontSize: calc(0.6rem + 0.5vw);
+        --title-fontSize: calc(0.9rem + 0.5vw);
+    }
 
+    form.create-account {
+        margin: auto;
+        height: max-content; 
+    }
 
+    div#create-account {
+        width: 75%;
+        margin: auto;
+        height: 100%;
+    }
+
+    #create-account p {
+        font-size: var(--title-fontSize);
+        margin: 5px 0 10px;
+    }
+
+    div#form-main {
+        padding: 5px;
+        padding-left: 15px;
+        height: 100%;
+        min-height: max-content;
+    }
+
+    .input-div {
+        padding: calc(1px + 0.3vw);
+        margin-bottom: 5px;
+        flex: 1;
+    }
+
+    .input-div label {
+        margin: 3px;
+        margin-left: var(--label-and-input-margin);
+        margin-right: var(--label-and-input-margin);
+    }
+
+    input {
+        margin: 3px var(--label-and-input-margin);
+        padding: 3px;
+    }
+
+    .error-message, .guide {
+        padding: 3px 3px 3px 20px;
+    }
+    
+    li {
+        margin: 2px 0;
+    }
+
+    div#terms-div input {
+        margin-left: calc(var(--label-and-input-margin)/ 2);
+    }
+
+    div#terms-div label {
+        width: max-content;
+        flex: unset;
+    }
+
+    div#terms-div ul {
+        margin-left: calc(var(--label-and-input-margin) / 2);
+        width: max-content;
+    }
+
+    div#terms-div ul li {
+        margin-right: calc(20px + 1vw);
+    }
+
+    button[type="submit"] {
+        margin: 30px 5px 5px;  
+        font-size: var(--label-and-input-fontSize);
+        width: max-content;
+        padding: 5px 5%;
+    }
+
+    div#log-in {
+        margin: 3px  0 0;
+    }
+
+    #log-in p, #log-in a {
+        font-size: var(--label-and-input-fontSize);
+        margin: 3px;
+        display: inline-block;
+    }
+    footer p{
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: 900px) and (min-height: 1000px) {
+    :root {
+        --header-height: 3vh; 
+        --footer-height: 5vh;
+        --label-and-input-margin: 5%;
+    
+        /* font-sizes */
+        --label-and-input-fontSize: calc(1rem + 0.5vw);
+        --title-fontSize: calc(1.3rem + 0.5vw);
+    }
+
+    form.create-account {
+        margin: auto;
+        height: max-content; 
+    }
+
+    div#create-account {
+        width: 75%;
+        margin: auto;
+        height: 100%;
+    }
+
+    #create-account p {
+        font-size: var(--title-fontSize);
+        margin: 15px 0 25px;
+    }
+
+    div#form-main {
+        padding: 5px;
+        padding-left: 15px;
+        height: 100%;
+        min-height: max-content;
+    }
+
+    .input-div {
+        padding: calc(1px + 0.3vw);
+        margin-bottom: 5px;
+        flex: 1;
+    }
+
+    .input-div label {
+        margin: 3px;
+        margin-left: var(--label-and-input-margin);
+        margin-right: var(--label-and-input-margin);
+    }
+
+    input {
+        margin: 3px var(--label-and-input-margin);
+        padding: 3px;
+    }
+
+    .error-message, .guide {
+        padding: 3px 3px 3px 20px;
+    }
+    
+    li {
+        margin: 2px 0;
+    }
+
+    div#terms-div input {
+        margin-left: calc(var(--label-and-input-margin)/ 2);
+    }
+
+    div#terms-div label {
+        width: max-content;
+        flex: unset;
+    }
+
+    div#terms-div ul {
+        margin-left: calc(var(--label-and-input-margin) / 2);
+        width: max-content;
+    }
+
+    div#terms-div ul li {
+        margin-right: calc(20px + 1vw);
+    }
+
+    button[type="submit"] {
+        margin: 30px 5px 5px;  
+        font-size: var(--label-and-input-fontSize);
+        width: max-content;
+        padding: 5px 5%;
+    }
+
+    div#log-in {
+        margin: 3px  0 0;
+    }
+
+    #log-in p, #log-in a {
+        font-size: var(--label-and-input-fontSize);
+        margin: 3px;
+        display: inline-block;
+    }
+}
 
 @media only screen and (min-width: 1000px) {
     :root {
         --header-height: 3vh; 
         --footer-height: 3vh;
-
         --label-and-input-margin: 3%;
     
         /* font-sizes */
@@ -331,12 +594,10 @@ div#log-in {
         --title-fontSize: calc(0.7rem + 0.5vw);
     }
 
-
     main {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        /* min-height: calc(100vh - var(--footer-height)); */
         height: calc(100vh - var(--footer-height));
         overflow: auto;
     }
@@ -462,4 +723,10 @@ div#log-in {
         margin: 3px;
         display: inline-block;
     }
+
+    footer {
+       justify-content: flex-end;
+    }
 }
+
+

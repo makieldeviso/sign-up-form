@@ -8,16 +8,17 @@
     <meta name="description" content="Thank you for making an account with Waryur Helmets, the best shop for best quality biker helmets">
     <meta name="author" content="Fred Mark Baldeviso">
     <script src="https://kit.fontawesome.com/ff4bf87dd5.js" crossorigin="anonymous"></script>
-    <script src="index.js" defer></script>
+    <script src="index.js" type="module" defer></script>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <title>Welcome</title>
 </head>
 <body>
     <header>
-        <ul class="other-links">
+        <ul id="other-links">
             <li><a href="https://makieldeviso.github.io/calculator/"><img src="./images/pmc.png" alt="pmc, calculator logo link"></a></li>
             <li><a href="https://makieldeviso.github.io/sketch/"><img src="./images/pixel_slate.png" alt="pixel slate, sketch app logo link"></a></li>
             <li><a href="https://makieldeviso.github.io/rock-paper-scissor/"><img src="./images/janken.png" alt="janken, rock-paper-scissor logo link"></a></li>
+            <li><a href="./thank-you.html">UWU</a></li>
         </ul>
     </header>
 
@@ -31,100 +32,24 @@
         </div>
 
         <div id="create-account">
-            <p>Create your account</p>
-            <form action="" method="" class="create-account" novalidate>
-                <div id="form-main">
-                    <div class="names"> 
-                        <div class="input-div">
-                            <label for="first-name">First Name</label>
-                            <input type="text" 
-                                id="first-name" 
-                                name="first-name">
-                            <ul class="error-message"></ul>
-                        </div>
-                        
-                        <div class="input-div">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" 
-                                id="last-name" 
-                                name="last-name">
-                            <ul class="error-message"></ul>
-                        </div>
-                    </div>
-                    
-                    <div class="contact">
-                        <div class="input-div">
-                            <label for="email">Email Address</label>
-                            <input type="email"
-                                id="email"
-                                name="email"
-                                placeholder="example@gmail.com">
-                            <ul class="error-message"></ul>
-                        </div>
-        
-                        <div class="input-div">
-                            <label for="phone">Phone Number <span class="optional">. Optional</span></label>
-                            <input type="tel"
-                                id="phone"
-                                name="phone">
-                            <ul class="error-message"></ul>
-                        </div>
-                    </div>
-                    
-                    <div class="pass">
-                        <div class="input-div">
-                            <label for="password">Password</label>
-                            <input type="password"
-                                id="password"
-                                name="password">
-                            <ul class="guide">
-                                <li data-check="length"><i class="fa-regular fa-circle-dot"></i> Must be at least 8 characters </li>
-                                <li data-check="number"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 number</li>
-                                <li data-check="capital"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 capital letter</li>
-                                <li data-check="lower"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 letter in lower case</li>
-                                <li data-check="special-char"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 special character</li>
-                            </ul>
-                            <ul class="error-message"></ul>
-                        </div>
-        
-                        <div class="input-div">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password"
-                                id="confirm-password"
-                                name="confirm-password">
-                            <ul class="error-message">
-                                <li data-check="confirm"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                        <div id="terms-div" class="input-div">
-                            <div id="terms-field">
-                                <input type="checkbox"
-                                    id="terms"
-                                    name="terms"
-                                    value="accept">
-                                <label id="terms-label" for="terms">I Agree to the <a href="/">WarYur Dev. Terms and Conditions</a> </label>
-                            </div>
-                            
-                            <ul class="error-message">
-                                <li data-check="terms-accept"></li>
-                            </ul>
-                        </div>
-    
-                        
-                        <div class="button-div">
-                            <button id="submit-button" type="submit">Create Account</button>
-                        </div>
-    
-                        <div id="log-in">
-                            <p>Already have an account?</p>
-                            <a id="sign-in" href="">Log in</a>
-                        </div>
-                </div> 
-            </form>
+
             
-        </div>
+
+            <div id="welcome-msg">
+                <img id="avatar-img" src="./images/helmet-image2.png" alt="helmet image">
+    
+                <h2>Hello <span id="username">WarYur</span>!</h2>
+                <div id="thanks"></div>
+                <div id="signup"></div>
+
+                <p class="stop"><i class="fa-solid fa-triangle-exclamation"></i> Hold up! This is not a real online service.</p>
+                
+                <p>As much I love staying inside my crib, messing with my computer and playing video games. I also enjoy riding a motorcycle and taking short rides to the beach. The thrill of the wind and the sense off freedom is exciting. It's also fun if you got a chick riding at the back... Wink. That said, a safety reminder to always wear a helmet when riding your bike.
+                Helmets not only provide protection but the art and decals also express your personality. Ride free! When you have that sense of safety, you can enjoy more of what life has to offer.</p>
+    
+                
+            </div>
+            </div>
     </main>
 
     <footer>

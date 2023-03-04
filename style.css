@@ -10,7 +10,7 @@
     --hero-image-div-height: calc(10% + 10vw);
     
     --form-bg-color: rgba(47, 53, 55, 0.7);
-    --form-font-color: #FEDB39;
+    --form-font-color: #feda39;
     --other-font-color: #E3F6FF;
     --valid-color: #06FF00;
     --invalid-color: #FF1700; 
@@ -30,6 +30,7 @@ body {
     box-sizing: border-box;
     font-family: var(--main-font);
     transition: all 0.1s ease-in-out;
+    color: #E3F6FF;
 }
 
 header {
@@ -41,8 +42,18 @@ header {
     top: 0;
     z-index: 2;
     padding: 3px;
+    transition: all 0.1s ease-in-out;
 }
 
+header.hidden {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+header ul#other-links.hidden {
+    height: 0;
+    opacity: 0;
+    display: none;
+}
 
 main {
     text-align: center;
@@ -65,14 +76,15 @@ footer {
     flex-wrap: wrap;
 }
 
-header ul.other-links {
+header ul#other-links {
     display: flex;
     list-style-type: none;
     align-items: center;
     height: 100%;
+    transition: all 0.1s ease-in-out;
 }
 
-header ul.other-links li {
+header ul#other-links li {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,13 +96,13 @@ header ul.other-links li {
     border-right: 2px solid #99a1a4;
 }
 
-header:hover ul.other-links li,
-header:focus ul.other-links li{
+header:hover ul#other-links li,
+header:focus ul#other-links li{
     /* padding: 0 40px 0 20px; */
     padding: 0 calc(10px + 1vw) 0 calc(5px + 1vw);
 }
 
-/* header ul.other-links li {
+/* header ul#other-links li {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,30 +112,30 @@ header:focus ul.other-links li{
     border-right: 2px solid #99a1a4;
 }
 
-header:hover ul.other-links li,
-header:focus ul.other-links li{
+header:hover ul#other-links li,
+header:focus ul#other-links li{
     padding: 0 40px 0 20px;
 } */
 
-header ul.other-links a{
+header ul#other-links a{
     height: inherit; 
     display: flex;
     justify-content: flex-start;
     align-items: center;  
 }
 
-header ul.other-links a img{
+header ul#other-links a img{
     height: calc(50% + 0.5vw);
     filter: invert(1) opacity(0.3);
 }
 
-/* header:hover ul.other-links a img,
-header:focus ul.other-links a img {
+/* header:hover ul#other-links a img,
+header:focus ul#other-links a img {
     filter: invert(0.8) opacity(1);
 } */
 
-header ul.other-links a img:hover,
-header ul.other-links a img:focus{
+header ul#other-links a img:hover,
+header ul#other-links a img:focus{
     filter: invert(1);
     transform: scale(1.1);
 }
@@ -390,6 +402,11 @@ footer p {
     font-size: calc(0.5rem + 0.5vw);
     display: inline-block;
     font-weight: bold;
+    color: #020100;
+}
+
+footer i {
+    color: #020100;
 }
 
 footer a{
@@ -617,25 +634,25 @@ footer a:active {
         background-color: rgba(47, 53, 55, 0.9);
     }
 
-    header ul.other-links {
+    header ul#other-links {
         display: flex;
         list-style-type: none;
         align-items: center;
         height: 100%;
     }
     
-    header:hover ul.other-links li,
-    header:focus ul.other-links li{
+    header:hover ul#other-links li,
+    header:focus ul#other-links li{
         padding: 0 40px 0 20px;
     }
         
-    header:hover ul.other-links a img,
-    header:focus ul.other-links a img {
+    header:hover ul#other-links a img,
+    header:focus ul#other-links a img {
         filter: invert(0.8) opacity(1);
     }
     
-    header ul.other-links a img:hover,
-    header ul.other-links a img:focus{
+    header ul#other-links a img:hover,
+    header ul#other-links a img:focus{
         filter: invert(1);
         transform: scale(1.1);
     }
@@ -776,3 +793,60 @@ footer a:active {
 }
 
 
+/* next page */
+
+img#avatar-img {
+    width: calc(70px + 2vw);
+}
+
+div#thanks {
+    height: calc(100px + 1vw);
+    background-image: url("./images/thanks.gif");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+div#thanks.still {
+    background-image: url("./images/thanks-still.png");
+}
+
+div#signup {
+    height: calc(15px + 0.5vw);
+    background-image: url("./images/signup.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position:relative;
+    top: -20px;
+}
+
+div#welcome-msg {
+    width: clamp(90%, 80%, 70%);
+    margin: calc(30px + 1vw) auto;
+}
+
+div#welcome-msg p {
+    font-size: var(--label-and-input-fontSize);
+    line-height: calc(1rem + 0.7vw);
+    word-spacing: calc(0.1rem + 0.1vw);
+    text-align: justify;
+    background-color: var(--form-bg-color);
+    padding: calc(1px + 1vw);
+    text-shadow: none;
+}
+
+h2 {
+    margin: calc(1px + 0.5vw) 0;
+}
+
+
+div#welcome-msg p.stop  {
+    text-align: center;
+    font-size: calc(var(--label-and-input-fontSize) * 1.3);
+    color: #e6d796;
+    background-color: rgba(126, 121, 121, 0.3);
+}
+
+div#welcome-msg p.stop > * {
+    color: #e6d796;
+}

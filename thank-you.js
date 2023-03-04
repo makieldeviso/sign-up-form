@@ -461,10 +461,10 @@ function submitForm(event) {
 
 
 
-// const thanks = document.querySelector("div#thanks");
-// setTimeout(()=> {
-//     thanks.classList.add("still");
-// },52);
+const thanks = document.querySelector("div#thanks");
+setTimeout(()=> {
+    thanks.classList.add("still");
+},52);
 
 
 

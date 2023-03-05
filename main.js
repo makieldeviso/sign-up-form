@@ -189,13 +189,13 @@ if (inputField === "#phone") {
     if (fieldValue.length === 0) {
         errors = [];
     } else if (fieldValue === null) {
-        errors.push("Kindly enter a valid phone number");
+        errors.push("Reminder: Invalid phone number");
     } else if (fieldValue.length != 0 && phoneRegex.test(fieldValue) === false) {
-        errors.push("Kindly enter a valid phone number");
+        errors.push("Reminder: Invalid phone number");
     }
 
     if (errors.length != 0) {
-        errors.push("Reminder: phone number is optional");
+        errors.push("Reminder: Phone number is optional");
     }
 }
 
@@ -237,7 +237,13 @@ if (inputField === "#phone") {
             inputElement.removeAttribute("class");
         }
         inputElement.classList.add("invalid");
-        inputFieldName[0]["validity"] = false; // Saves validity to global object
+
+        if (inputFieldName[0]["name"] === "phoneNumber") {
+            inputFieldName[0]["validity"] = true; // Special case for phoneNumber, always true since optional
+        } else {
+            inputFieldName[0]["validity"] = false; // Saves validity to global object
+        }
+        
         
     } else if (errors.length === 0) {
         removeErrorList(inputField);

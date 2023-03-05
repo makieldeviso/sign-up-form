@@ -243,10 +243,15 @@ input.valid {
     box-shadow: 0 0 2px 2px var(--valid-color);
 }
 
+input#phone.invalid {
+    border: 2px solid rgb(153, 161, 164);
+    box-shadow: 0 0 2px 2px var(--form-font-color);
+}   
+
 input.invalid {
     border: 2px solid rgb(153, 161, 164);
     box-shadow: 0 0 2px 2px var(--invalid-color);
-}   
+} 
 
 div.pass-and-mask {
     display: flex;

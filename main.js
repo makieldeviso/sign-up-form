@@ -1,57 +1,52 @@
-// Verify element then add event listener
+// Verify element if it exist first, then add event listener.
+//  Ensures no error since im using 2 html file.
 function verifyEventAdd(element, event, functionName) {
     if (element != null) {
         element.addEventListener(event, functionName);
     }
 }
 
-
-
 const firstName = document.querySelector("#first-name");
-    // firstName.addEventListener("blur", validateInputField); xxxxxxxxxxx
     verifyEventAdd(firstName, "blur", validateInputField);
-    // Note: mousedown event listener is added later in code
-    //  to firstName, lastName, email, phoneNumber
+    
 const lastName = document.querySelector("#last-name");
-    // lastName.addEventListener("blur", validateInputField); xxxxxxxxxxx
     verifyEventAdd(lastName, "blur", validateInputField);
 
-
 const email = document.querySelector("#email");
-    // email.addEventListener("blur", validateInputField); xxxxxxxxx
     verifyEventAdd(email, "blur", validateInputField);
 
 const phoneNumber = document.querySelector("#phone");
-    // phoneNumber.addEventListener("blur", validateInputField); xxxxxxxx
     verifyEventAdd(phoneNumber, "blur", validateInputField);
 
-
 const password = document.querySelector("#password");
-    // password.addEventListener("mousedown", validatePassword);
-    // password.addEventListener("input", validatePassword);
-    // password.addEventListener("blur", validatePassword);
-
     verifyEventAdd(password, "mousedown", validatePassword);
     verifyEventAdd(password, "input", validatePassword);
     verifyEventAdd(password, "blur", validatePassword);
 
-
 const confirmPassword = document.querySelector("#confirm-password");
-    // confirmPassword.addEventListener("mousedown", validateConfirmPassword);
-    // confirmPassword.addEventListener("input", validateConfirmPassword);
-    // confirmPassword.addEventListener("blur", validateConfirmPassword);
-
     verifyEventAdd(confirmPassword, "mousedown", validateConfirmPassword);
     verifyEventAdd(confirmPassword, "input", validateConfirmPassword);
     verifyEventAdd(confirmPassword, "blur", validateConfirmPassword);
 
 const unmaskButton = document.querySelector(`button[data-action="unmask"]`);
 const unmaskButtonConfirm = document.querySelector(`button[data-action="unmaskConfirm"]`);
-
     verifyEventAdd(unmaskButton, "mousedown", unmaskPassword);
     verifyEventAdd(unmaskButtonConfirm, "mousedown", unmaskPassword);
 
+const terms = document.querySelector("input#terms");
+    verifyEventAdd(terms, "change", validatesTerms);
+    verifyEventAdd(terms, "blur", validatesTerms);
 
+const form = document.querySelector("form.create-account");
+    verifyEventAdd(form, "submit", submitForm);
+
+const headerBar = document.querySelector("header");
+const headerContent = document.querySelector("header ul");
+    window.addEventListener("scroll", hideHeader);
+
+
+
+// Toggles password masking (start) ------------
 function MaskFlag(name) {
     this.name = name;
     this.status = true;
@@ -60,9 +55,9 @@ function MaskFlag(name) {
 let passMasked = new MaskFlag("passMasked");
 let passConfirmMasked = new MaskFlag("passMasked");
 
-function unmaskPassword() {
-    
-    function mask (maskAction, inputElement, button, flag) {
+function unmaskPassword() { 
+
+    function mask (maskAction, inputElement, button, flag) { // Reusable function
         if (maskAction === false) {
             inputElement.type = "text";
             button.style.backgroundImage = `url("./images/eye-off.svg")`;
@@ -86,29 +81,10 @@ function unmaskPassword() {
     } else if (this === unmaskButtonConfirm && passConfirmMasked["status"] === false) {
         mask(true, confirmPassword , unmaskButtonConfirm, passConfirmMasked);
     }
-
-    console.log(passMasked);
 }
+// Toggles password masking (start) ------------
 
-
-
-
-
-const terms = document.querySelector("input#terms");
-    // terms.addEventListener("change", validatesTerms);
-    verifyEventAdd(terms, "change", validatesTerms);
-    verifyEventAdd(terms, "blur", validatesTerms);
-
-const form = document.querySelector("form.create-account");
-    // form.addEventListener("submit", submitForm);
-    verifyEventAdd(form, "submit", submitForm);
-
-
-const headerBar = document.querySelector("header");
-const headerContent = document.querySelector("header ul");
-    window.addEventListener("scroll", hideHeader);
-
-// Hides header on scroll down and returns if page is on top;
+// Hides header on scroll down and returns if page is on top (start) ----------
 function hideHeader() {
     if (window.scrollY > 0) {
         headerBar.classList.add("hidden"); 
@@ -118,9 +94,10 @@ function hideHeader() {
         headerContent.classList.remove("hidden");         
     }
 }
+// Hides header on scroll down and returns if page is on top (end) ----------
 
-
-let overAllValidation = []; // Saves status of input fields
+// Saves status of input fields (global object) (start) -----------------
+let overAllValidation = [];
 function CheckUserAction(name, inputField) {
     this.name = name;
     this.viewed = false;
@@ -135,8 +112,9 @@ function CheckUserAction(name, inputField) {
     let passwordStatus = new CheckUserAction("password", password);
     let confirmPasswordStatus = new CheckUserAction("confirmPassword", confirmPassword);
     let termsStatus = new CheckUserAction("terms", terms);
+// Saves status of input fields (global object) (end) -----------------
 
-// Validates Other Input (start) -----------------
+// Validates Input [firstName, lastName, email, phoneNumber] (start) -----------------
 //  Clears styling upon click to input field (UI related) 
 function clearStyling() {
     if (this.hasAttribute("class")) {
@@ -162,8 +140,7 @@ function validateInputField() {
 // Validation Starts Here
 // Validates First Name Input Field
     if (inputField === "#first-name") {
-    // Remembers that the user has checked/viewed this input field
-        inputFieldName.push(firstNameStatus);
+        inputFieldName.push(firstNameStatus); // Remembers that the user has checked/viewed this input field
         
         if (fieldValue.length === 0) {
             errors.push("Field is empty. Kindly fill in a valid first name");
@@ -174,8 +151,7 @@ function validateInputField() {
 
 // Validates Last Name Input Field
 if (inputField === "#last-name") {
-// Remembers that the user has checked/viewed this input field
-    inputFieldName.push(lastNameStatus);
+    inputFieldName.push(lastNameStatus); // Remembers that the user has checked/viewed this input field
 
     if (fieldValue.length === 0) {
         errors.push("Field is empty. Kindly fill in a valid last name");
@@ -186,8 +162,7 @@ if (inputField === "#last-name") {
 
 // Validates email Input Field
 if (inputField === "#email") {
-// Remembers that the user has checked/viewed this input field
-    inputFieldName.push(emailStatus);
+    inputFieldName.push(emailStatus); // Remembers that the user has checked/viewed this input field
 
     let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
@@ -207,8 +182,7 @@ if (inputField === "#email") {
 
 // Validates phone Input Field
 if (inputField === "#phone") {
-// Remembers that the user has checked/viewed this input field
-    inputFieldName.push(phoneNumberStatus);
+    inputFieldName.push(phoneNumberStatus); // Remembers that the user has checked/viewed this input field
 
     let phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
@@ -225,6 +199,8 @@ if (inputField === "#phone") {
     }
 }
 
+
+// Next step in validation
 // Checks if there are any Errors
 
     function removeErrorList(field) { //  (Reusable Function)
@@ -277,7 +253,7 @@ if (inputField === "#phone") {
     }
 
     // Adds active input listening that guides user if 
-    // they already input in correct format, 
+    // they already filled in input in correct format, 
     // only triggers if the user has already checked field before
      
     if (inputFieldName[0]["viewed"] === false) {
@@ -287,10 +263,11 @@ if (inputField === "#phone") {
     }
 }
 
-// validates Other Input (end) -----------------
+// validates Input (end) -----------------
 
 
 // Validates Password (start) -----------
+// Password validation global object
 let listItemArray = [];
 function ListItem(listElement, listIcon) {
     this.listElement = listElement;
@@ -341,7 +318,6 @@ function validatePassword(event) {
             object["listElement"].style.color = "#FF1700";
             object["passed"] = false;
         }
-
     }
 
 // Check if password has 1 number
@@ -428,6 +404,7 @@ function validateConfirmPassword(event) {
     let thisErrorList = document.querySelector("#confirm-password-error");
 
     //Add event listener to actively listens to the password input
+    // if the user edits the password, UI changes in the confirm password field
     if (event.type === "mousedown") {
         password.addEventListener("input", activePassListening);
 
@@ -449,7 +426,6 @@ function validateConfirmPassword(event) {
             confirmPasswordStatus["validity"] = false;
             this.classList.add("invalid");
             unmaskButtonConfirm.classList.add("invalid");
-
             thisErrorList.style.display = "unset";
 
         } else if (this.value.length === 0 ) {
@@ -457,13 +433,12 @@ function validateConfirmPassword(event) {
             confirmPasswordStatus["validity"] = false;
             this.classList.add("invalid");
             unmaskButtonConfirm.classList.add("invalid");
-
             thisErrorList.style.display = "unset";
+
         }else if (this.value.length != 0 && this.value === passwordInput) {
             confirmInputElement.innerHTML = "";
             this.classList.add("valid");
             unmaskButtonConfirm.classList.add("valid");
-
             confirmPasswordStatus["validity"] = true;
         }
     }
@@ -496,7 +471,6 @@ function validatesTerms() {
         termsStatus["validity"] = false;
     }
 }
-
 // Validates Accept Terms and Conditions (end) ------------
 
 // Validate and Submit (start) ----------------
@@ -522,7 +496,7 @@ function submitForm(event) {
     overAllValidation.some(validation => {
         if (validation["validity"] === false) {
             submitForm = false;
-            jumpFocus = `${"#" + validation["inputField"].getAttribute("id")}`;
+            jumpFocus = `${"#" + validation["inputField"].getAttribute("id")}`; //first instance of error
             return true; // Break loop when first instance of error is detected
         }
     });
@@ -547,6 +521,8 @@ function submitForm(event) {
         event.preventDefault();
         let firstNameValue = firstName.value;
         
+
+        // Saves the name input to be used for welcome message on next page
         const nextPageURL = `next-page.html?userName=${encodeURIComponent(firstNameValue)}`;
         window.location.href = nextPageURL;
     }
@@ -556,15 +532,16 @@ function submitForm(event) {
 
 
 
-// Next page scripts
+// Next page scripts !!!!!!
 
 // Verify if element exist first before running function
-function runElementFunction(element, functionName) {
+function runElementFunction(element, functionName) { //Reusable function
     if (element != null) {
         functionName();
     }
 }
 
+// animates the thanks message then keep still
 const thanks = document.querySelector("div#thanks");
 const thanksSignUp = document.querySelector("div#sign-up");
 function animateThanksMessage() {
@@ -576,6 +553,7 @@ function animateThanksMessage() {
 
 runElementFunction(thanks, animateThanksMessage);
 
+//  Prints welcome message with user name from forms input
 const userName = document.querySelector("span#username");
 function printUserName() {
     const urlParams = new URLSearchParams(window.location.search); 

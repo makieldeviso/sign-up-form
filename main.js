@@ -82,7 +82,7 @@ function unmaskPassword() {
         mask(true, confirmPassword , unmaskButtonConfirm, passConfirmMasked);
     }
 }
-// Toggles password masking (start) ------------
+// Toggles password masking (end) ------------
 
 // Hides header on scroll down and returns if page is on top (start) ----------
 function hideHeader() {

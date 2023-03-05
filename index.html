@@ -8,17 +8,17 @@
     <meta name="description" content="Create an account and enjoy hassle free shopping of our catalog">
     <meta name="author" content="Fred Mark Baldeviso">
     <script src="https://kit.fontawesome.com/ff4bf87dd5.js" crossorigin="anonymous"></script>
-    <script src="index.js" defer></script>
+    <script src="./main.js" type="module" defer></script>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <title>Create Account for Waryur</title>
 </head>
 <body>
     <header>
         <ul id="other-links">
-            <li><a href="https://makieldeviso.github.io/calculator/"><img src="./images/pmc.png" alt="pmc, calculator logo link"></a></li>
-            <li><a href="https://makieldeviso.github.io/sketch/"><img src="./images/pixel_slate.png" alt="pixel slate, sketch app logo link"></a></li>
-            <li><a href="https://makieldeviso.github.io/rock-paper-scissor/"><img src="./images/janken.png" alt="janken, rock-paper-scissor logo link"></a></li>
-            <li><a href="./thank-you.html">UWU</a></li>
+            <li><a href="https://makieldeviso.github.io/calculator/" target="_blank"><img src="./images/pmc.png" alt="pmc, calculator logo link"></a></li>
+            <li><a href="https://makieldeviso.github.io/sketch/" target="_blank"><img src="./images/pixel_slate.png" alt="pixel slate, sketch app logo link"></a></li>
+            <li><a href="https://makieldeviso.github.io/rock-paper-scissor/" target="_blank"><img src="./images/janken.png" alt="janken, rock-paper-scissor logo link"></a></li>
+            <li><a href="./next-page.html">UWU</a></li>
         </ul>
     </header>
 
@@ -75,9 +75,12 @@
                     <div class="pass">
                         <div class="input-div">
                             <label for="password">Password</label>
-                            <input type="password"
-                                id="password"
-                                name="password">
+                            <div class="pass-and-mask">
+                                <input type="password"
+                                    id="password"
+                                    name="password">
+                                <button data-action="unmask" type="button">&nbsp;</button>
+                            </div>
                             <ul class="guide">
                                 <li data-check="length"><i class="fa-regular fa-circle-dot"></i> Must be at least 8 characters </li>
                                 <li data-check="number"><i class="fa-regular fa-circle-dot"></i> Must contain at least 1 number</li>
@@ -90,10 +93,13 @@
         
                         <div class="input-div">
                             <label for="confirm-password">Confirm Password</label>
-                            <input type="password"
-                                id="confirm-password"
-                                name="confirm-password">
-                            <ul class="error-message">
+                            <div class="pass-and-mask">
+                                <input type="password"
+                                    id="confirm-password"
+                                    name="confirm-password">
+                                <button data-action="unmaskConfirm" type="button">&nbsp;</button>
+                            </div>
+                            <ul id="confirm-password-error" class="error-message">
                                 <li data-check="confirm"></li>
                             </ul>
                         </div>

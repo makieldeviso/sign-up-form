@@ -1,27 +1,108 @@
+// Verify element then add event listener
+function verifyEventAdd(element, event, functionName) {
+    if (element != null) {
+        element.addEventListener(event, functionName);
+    }
+}
+
+
+
 const firstName = document.querySelector("#first-name");
-    firstName.addEventListener("blur", validateInputField);
+    // firstName.addEventListener("blur", validateInputField); xxxxxxxxxxx
+    verifyEventAdd(firstName, "blur", validateInputField);
     // Note: mousedown event listener is added later in code
     //  to firstName, lastName, email, phoneNumber
 const lastName = document.querySelector("#last-name");
-    lastName.addEventListener("blur", validateInputField);
+    // lastName.addEventListener("blur", validateInputField); xxxxxxxxxxx
+    verifyEventAdd(lastName, "blur", validateInputField);
+
+
 const email = document.querySelector("#email");
-    email.addEventListener("blur", validateInputField);
+    // email.addEventListener("blur", validateInputField); xxxxxxxxx
+    verifyEventAdd(email, "blur", validateInputField);
+
 const phoneNumber = document.querySelector("#phone");
-    phoneNumber.addEventListener("blur", validateInputField);
+    // phoneNumber.addEventListener("blur", validateInputField); xxxxxxxx
+    verifyEventAdd(phoneNumber, "blur", validateInputField);
+
+
 const password = document.querySelector("#password");
-    password.addEventListener("mousedown", validatePassword);
-    password.addEventListener("input", validatePassword);
-    password.addEventListener("blur", validatePassword);
+    // password.addEventListener("mousedown", validatePassword);
+    // password.addEventListener("input", validatePassword);
+    // password.addEventListener("blur", validatePassword);
+
+    verifyEventAdd(password, "mousedown", validatePassword);
+    verifyEventAdd(password, "input", validatePassword);
+    verifyEventAdd(password, "blur", validatePassword);
+
+
 const confirmPassword = document.querySelector("#confirm-password");
-    confirmPassword.addEventListener("mousedown", validateConfirmPassword);
-    confirmPassword.addEventListener("input", validateConfirmPassword);
-    confirmPassword.addEventListener("blur", validateConfirmPassword);
+    // confirmPassword.addEventListener("mousedown", validateConfirmPassword);
+    // confirmPassword.addEventListener("input", validateConfirmPassword);
+    // confirmPassword.addEventListener("blur", validateConfirmPassword);
+
+    verifyEventAdd(confirmPassword, "mousedown", validateConfirmPassword);
+    verifyEventAdd(confirmPassword, "input", validateConfirmPassword);
+    verifyEventAdd(confirmPassword, "blur", validateConfirmPassword);
+
+const unmaskButton = document.querySelector(`button[data-action="unmask"]`);
+const unmaskButtonConfirm = document.querySelector(`button[data-action="unmaskConfirm"]`);
+
+    verifyEventAdd(unmaskButton, "mousedown", unmaskPassword);
+    verifyEventAdd(unmaskButtonConfirm, "mousedown", unmaskPassword);
+
+
+function MaskFlag(name) {
+    this.name = name;
+    this.status = true;
+}
+
+let passMasked = new MaskFlag("passMasked");
+let passConfirmMasked = new MaskFlag("passMasked");
+
+function unmaskPassword() {
+    
+
+    function mask (maskAction, inputElement, button, flag) {
+        if (maskAction === false) {
+            inputElement.type = "text";
+            button.style.backgroundImage = `url("./images/eye-off.svg")`;
+            flag["status"] = false;
+        } else if (maskAction === true) {
+            inputElement.type = "password";
+            button.style.backgroundImage = `url("./images/eye.svg")`;
+            flag["status"] = true;
+        }
+    }
+
+    if (this === unmaskButton && passMasked["status"] === true ) {
+        mask(false, password, unmaskButton, passMasked);
+
+    } else if (this === unmaskButton && passMasked["status"] === false) {
+        mask(true, password, unmaskButton, passMasked);
+
+    } else if (this === unmaskButtonConfirm && passConfirmMasked["status"] === true) {
+        mask(false, confirmPassword , unmaskButtonConfirm, passConfirmMasked);
+
+    } else if (this === unmaskButtonConfirm && passConfirmMasked["status"] === false) {
+        mask(true, confirmPassword , unmaskButtonConfirm, passConfirmMasked);
+    }
+
+    console.log(passMasked);
+}
+
+
+
+
 
 const terms = document.querySelector("input#terms");
-    terms.addEventListener("change", validatesTerms);
+    // terms.addEventListener("change", validatesTerms);
+    verifyEventAdd(terms, "change", validatesTerms);
+    verifyEventAdd(terms, "blur", validatesTerms);
 
 const form = document.querySelector("form.create-account");
-    form.addEventListener("submit", submitForm);
+    // form.addEventListener("submit", submitForm);
+    verifyEventAdd(form, "submit", submitForm);
 
 
 const headerBar = document.querySelector("header");
@@ -205,7 +286,6 @@ if (inputField === "#phone") {
         inputElement.addEventListener("input", validateInputField);
         inputElement.addEventListener("mousedown", clearStyling);
     }
-console.log(overAllValidation);
 }
 
 // validates Other Input (end) -----------------
@@ -238,7 +318,8 @@ function validatePassword(event) {
 
     if (event.type === "mousedown") {
         if (this.hasAttribute("class")) {
-            this.removeAttribute("class")
+            this.removeAttribute("class");
+            unmaskButton.removeAttribute("class");
         }
     }
 
@@ -329,15 +410,15 @@ function validatePassword(event) {
     
         if (resultsArray.includes(false) || resultsArray.includes("neutral")) {
             this.classList.add("invalid");
+            unmaskButton.classList.add("invalid");
             passwordStatus["validity"] = false; // Saves validity to global object
         } else {
             this.classList.add("valid");
+            unmaskButton.classList.add("valid");
             guideList.style.display = "none";
             passwordStatus["validity"] = true;  // Saves validity to global object
         }
     }
-    
-    console.log(overAllValidation);
 }
 // Validates Password (end) -----------
 
@@ -345,52 +426,62 @@ function validatePassword(event) {
 let confirmInputElement = document.querySelector("[data-check='confirm']");
 function validateConfirmPassword(event) {
     let passwordInput = password.value;
+    let thisErrorList = document.querySelector("#confirm-password-error");
 
     //Add event listener to actively listens to the password input
     if (event.type === "mousedown") {
         password.addEventListener("input", activePassListening);
 
         if (this.hasAttribute("class")) {
-            this.removeAttribute("class")
+            this.removeAttribute("class");
+            unmaskButtonConfirm.removeAttribute("class");
        }  
-       this.nextElementSibling.style.display = "none";
+       thisErrorList.style.display = "none";
     }
 
     if (event.type === "blur") {
         if (this.hasAttribute("class")) {
-            this.removeAttribute("class")
+            this.removeAttribute("class");
+            unmaskButtonConfirm.removeAttribute("class");
         }
 
         if (this.value != passwordInput && this.value.length != 0) {
             confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Must match passwords`;
             confirmPasswordStatus["validity"] = false;
             this.classList.add("invalid");
-            this.nextElementSibling.style.display = "unset";
+            unmaskButtonConfirm.classList.add("invalid");
+
+            thisErrorList.style.display = "unset";
+
         } else if (this.value.length === 0 ) {
             confirmInputElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Enter password`;
             confirmPasswordStatus["validity"] = false;
             this.classList.add("invalid");
-            this.nextElementSibling.style.display = "unset";
+            unmaskButtonConfirm.classList.add("invalid");
+
+            thisErrorList.style.display = "unset";
         }else if (this.value.length != 0 && this.value === passwordInput) {
             confirmInputElement.innerHTML = "";
             this.classList.add("valid");
+            unmaskButtonConfirm.classList.add("valid");
+
             confirmPasswordStatus["validity"] = true;
         }
-        console.log(this);
     }
 
 function activePassListening() {
     // Removes confirm pass UI, when password is altered
-    if (confirmPassword.value != passwordInput) {
+    if (confirmPassword.value != passwordInput || confirmPassword.value != password.value) {
         if (confirmPassword.hasAttribute("class")) {
-            confirmPassword.removeAttribute("class")
+            confirmPassword.removeAttribute("class");
+            unmaskButtonConfirm.removeAttribute("class");
          }
         confirmInputElement.innerHTML = "";
+        confirmInputElement.parentElement.style.display = "none";
     }
     // No UI changes when password matches during active input, 
     //  so that the user will try to confirm password again
 }
-console.log(overAllValidation);
 }
 // Validates Confirm Password (end) -----------
 
@@ -405,11 +496,9 @@ function validatesTerms() {
     } else {
         termsStatus["validity"] = false;
     }
-    console.log(termsStatus);
 }
 
 // Validates Accept Terms and Conditions (end) ------------
-
 
 // Validate and Submit (start) ----------------
 function submitForm(event) {
@@ -423,6 +512,7 @@ function submitForm(event) {
 
     let inputs = document.querySelectorAll("form.create-account input");
 
+    let submitForm = true;
     // Simulates blur event to all input fields to validate input values
     inputs.forEach(input => {
         input.dispatchEvent(blurEvent);
@@ -432,7 +522,7 @@ function submitForm(event) {
     let jumpFocus = ""; // Save here the first instance of Error
     overAllValidation.some(validation => {
         if (validation["validity"] === false) {
-            event.preventDefault();
+            submitForm = false;
             jumpFocus = `${"#" + validation["inputField"].getAttribute("id")}`;
             return true; // Break loop when first instance of error is detected
         }
@@ -444,35 +534,54 @@ function submitForm(event) {
         termsErrorList.classList.add("invalid");
         termsErrorList.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Kindly accept the terms and conditions to continue`;
         termsErrorList.parentElement.style.display = "unset";
-        console.log(termsErrorList);
     }
+ 
+    if (submitForm === false) {
+        event.preventDefault(); // stops the form from sending
 
+        // Scrolls to first instance of error
+        let firstInstanceError = document.querySelector(jumpFocus);
+        firstInstanceError.scrollIntoView({behavior: "smooth", block: "center"});
+        return;
 
-    let firstInstanceError = document.querySelector(jumpFocus);
-    firstInstanceError.scrollIntoView({behavior: "smooth", block: "center"});
-
+    } else if (submitForm === true) {
+        event.preventDefault();
+        let firstNameValue = firstName.value;
+        
+        const nextPageURL = `next-page.html?userName=${encodeURIComponent(firstNameValue)}`;
+        window.location.href = nextPageURL;
+    }
 }
 // Validate and Submit (end) ----------------
 
 
 
 
+// Next page scripts
 
+// Verify if element exist first before running function
+function runElementFunction(element, functionName) {
+    if (element != null) {
+        functionName();
+    }
+}
 
+const thanks = document.querySelector("div#thanks");
+const thanksSignUp = document.querySelector("div#sign-up");
+function animateThanksMessage() {
+    setTimeout(()=> {
+        thanks.classList.add("still");
+        thanksSignUp.classList.add("visible");
+        }, 3800);
+}
 
+runElementFunction(thanks, animateThanksMessage);
 
-// const thanks = document.querySelector("div#thanks");
-// setTimeout(()=> {
-//     thanks.classList.add("still");
-// },52);
+const userName = document.querySelector("span#username");
+function printUserName() {
+    const urlParams = new URLSearchParams(window.location.search); 
+    const definedUserName = String(urlParams.get("userName")).toUpperCase();
+    userName.textContent = definedUserName;
+}
 
-
-
-
-
-
-
-
-
-
-
+runElementFunction(userName, printUserName);

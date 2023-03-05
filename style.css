@@ -30,7 +30,6 @@ body {
     box-sizing: border-box;
     font-family: var(--main-font);
     transition: all 0.1s ease-in-out;
-    color: #E3F6FF;
 }
 
 header {
@@ -251,8 +250,9 @@ input {
     width: var(--input-and-error-width);
     font-size: var(--label-and-input-fontSize);
     font-weight: bold;
-    padding: 5px;
+    padding: 2px;
     background-color: #ECF9FF;
+    border: 2px solid #7e7979;
 }
 
 input.valid {
@@ -264,6 +264,67 @@ input.invalid {
     border: 2px solid rgb(153, 161, 164);
     box-shadow: 0 0 2px 2px var(--invalid-color);
 }   
+
+:root {
+    --unmask-width: 10%;
+}
+
+div.pass-and-mask {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+}
+
+input#password, input#confirm-password {
+    display: inline-block;
+    width: calc(var(--input-and-error-width) - var(--unmask-width));
+    margin-right: 0;
+    border-right: none;
+}
+
+button[data-action ='unmask'],
+button[data-action ='unmaskConfirm']{
+    display: inline-block;
+    width: var(--unmask-width); 
+    margin: 3px var(--label-and-input-margin);
+    font-size: var(--label-and-input-fontSize);
+    margin-left: 0;
+    padding: 2px;
+    border: 2px solid #7e7979;
+    border-left: none;
+    background-color: #ECF9FF;
+    background-image: url("./images/eye.svg");
+    background-size: calc(30% + 1vw);
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: var(--label-and-input-fontSize);
+}
+
+input#password.valid, input#confirm-password.valid,
+input#password.invalid, input#confirm-password.invalid {
+    border-right: none;
+}
+
+button[data-action ='unmask'].valid,
+button[data-action ='unmaskConfirm'].valid{
+    border: 2px solid #99a1a4;
+    border-left: none;
+    box-shadow: 0 0 2px 2px var(--valid-color);
+}
+
+button[data-action ='unmask'].invalid,
+button[data-action ='unmaskConfirm'].invalid{
+    border: 2px solid rgb(153, 161, 164);
+    border-left: none;
+    box-shadow: 0 0 2px 2px var(--invalid-color);
+}
+
+
+
+
+
+
 
 input#terms,  label#terms-label {
     display: inline-block;
@@ -797,6 +858,17 @@ footer a:active {
 
 img#avatar-img {
     width: calc(70px + 2vw);
+    margin: calc(1px + 1vw);
+    filter: brightness(0.8);
+}
+
+h2 {
+    color: var(--other-font-color);
+    font-family: var(--title-font);
+    word-spacing: calc(1rem + 0.5vw);
+    letter-spacing: calc(0.3rem + 0.5vw);
+    margin: calc(1px + 0.5vw) 0;
+    text-shadow: 0 0 3px var(--form-font-color);
 }
 
 div#thanks {
@@ -810,7 +882,7 @@ div#thanks.still {
     background-image: url("./images/thanks-still.png");
 }
 
-div#signup {
+div#sign-up {
     height: calc(15px + 0.5vw);
     background-image: url("./images/signup.png");
     background-size: contain;
@@ -818,11 +890,17 @@ div#signup {
     background-repeat: no-repeat;
     position:relative;
     top: -20px;
+    transition: opacity 0.7s ease-in-out;
+    opacity: 0;
+}
+
+div#sign-up.visible {
+    opacity: 1;
 }
 
 div#welcome-msg {
     width: clamp(90%, 80%, 70%);
-    margin: calc(30px + 1vw) auto;
+    margin: calc(5px + 0.5vw) auto;
 }
 
 div#welcome-msg p {
@@ -835,18 +913,23 @@ div#welcome-msg p {
     text-shadow: none;
 }
 
-h2 {
-    margin: calc(1px + 0.5vw) 0;
-}
-
 
 div#welcome-msg p.stop  {
     text-align: center;
     font-size: calc(var(--label-and-input-fontSize) * 1.3);
     color: #e6d796;
     background-color: rgba(126, 121, 121, 0.3);
+    padding: calc(0.5px + 0.5vw);
 }
 
 div#welcome-msg p.stop > * {
     color: #e6d796;
+}
+
+div#welcome-msg p#back {
+    background-color: unset;
+    text-align: center;
+    padding: 0;
+    margin: calc(1px + 1vw);
+    font-size: calc(var(--label-and-input-fontSize) * 1.3);
 }

@@ -60,7 +60,7 @@ main {
     text-align: center;
     padding-top: var(--header-height);
     min-height: calc(100vh - var(--footer-height));
-    background-image: url("./images/background.jpg");
+    background-image: url("./images/background.png");
     background-size: cover;
     background-position: center;
 }

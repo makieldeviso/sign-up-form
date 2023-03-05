@@ -62,7 +62,6 @@ let passConfirmMasked = new MaskFlag("passMasked");
 
 function unmaskPassword() {
     
-
     function mask (maskAction, inputElement, button, flag) {
         if (maskAction === false) {
             inputElement.type = "text";

@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Work+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@300&family=Work+Sans:wght@300&display=swap');
 
 :root {
     --header-height: 3vh;
     --footer-height: 5vh;
     --title-font: 'Montserrat', sans-serif;
     --main-font: 'Montserrat', sans-serif;
+    --input-font: 'Roboto Mono', monospace;
     --label-and-input-margin: 5%;
     --input-and-error-width: 90%;
     --hero-image-div-height: calc(10% + 10vw);
@@ -249,6 +250,8 @@ input {
     margin: calc(0.5px + 0.5vw) var(--label-and-input-margin);
     width: var(--input-and-error-width);
     font-size: var(--label-and-input-fontSize);
+    font-family:'Roboto Mono', monospace;
+    text-indent: 5px;
     font-weight: bold;
     padding: 2px;
     background-color: #ECF9FF;
@@ -273,7 +276,6 @@ div.pass-and-mask {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 5px;
 }
 
 input#password, input#confirm-password {
@@ -283,11 +285,13 @@ input#password, input#confirm-password {
     border-right: none;
 }
 
+
 button[data-action ='unmask'],
 button[data-action ='unmaskConfirm']{
     display: inline-block;
     width: var(--unmask-width); 
     margin: 3px var(--label-and-input-margin);
+    font-family:'Roboto Mono', monospace;
     font-size: var(--label-and-input-fontSize);
     margin-left: 0;
     padding: 2px;
@@ -299,6 +303,11 @@ button[data-action ='unmaskConfirm']{
     background-position: center;
     background-repeat: no-repeat;
     font-size: var(--label-and-input-fontSize);
+}
+
+button[data-action ='unmask']:hover,
+button[data-action ='unmaskConfirm']:hover {
+    filter: brightness(0.9);
 }
 
 input#password.valid, input#confirm-password.valid,
@@ -319,12 +328,6 @@ button[data-action ='unmaskConfirm'].invalid{
     border-left: none;
     box-shadow: 0 0 2px 2px var(--invalid-color);
 }
-
-
-
-
-
-
 
 input#terms,  label#terms-label {
     display: inline-block;
@@ -534,6 +537,12 @@ footer a:active {
 
     input {
         margin: 3px var(--label-and-input-margin);
+        padding: 3px;
+    }
+
+    button[data-action ='unmask'],
+    button[data-action ='unmaskConfirm']{
+        margin: 3px var(--label-and-input-margin) 3px 0;
         padding: 3px;
     }
 
@@ -804,6 +813,7 @@ footer a:active {
         margin: 3px var(--label-and-input-margin);
         padding: 3px;
     }
+
 
     .error-message, .guide {
         padding: 3px 3px 3px 20px;

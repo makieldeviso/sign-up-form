@@ -22,27 +22,27 @@ The validation for email address must pass a specific format rule that consist o
 let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 ```
 Wherein this format will pass:
-example@mail.com
+>example@mail.com
 
 The phone number input is optional. It means that the user can send in an empty phone number data and receive no error. However, if the user tries to enter a phone number, it is validated with a regex:
 ```
 let phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 ```
 Wherein any of these formats will pass:
-(123) 456-7890
-(123)456-7890
-123-456-7890
-1234567890
+- (123) 456-7890
+- (123)456-7890
+- 123-456-7890
+- 1234567890
 
 Validating the password follows common modern rules in the web. The following regular expressions check the password input:
 
-/^/ - Matches the start of the string
-/(?=.*\d)/ - Positive lookahead assertion for at least one digit
-/(?=.*[A-Z])/ - Positive lookahead assertion for at least one uppercase letter
-/(?=.*[a-z])/ - Positive lookahead assertion for at least one lowercase letter
-/(?=.&ast;[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/ - Positive lookahead assertion for at least one special character
-/.{8,} / - Matches any character (except newline) at least 8 times
-/$/ - Matches the end of the string
+- /^/ - Matches the start of the string
+- /(?=.*\d)/ - Positive lookahead assertion for at least one digit
+- /(?=.*[A-Z])/ - Positive lookahead assertion for at least one uppercase letter
+- /(?=.*[a-z])/ - Positive lookahead assertion for at least one lowercase letter
+- /(?=.&ast;[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/ - Positive lookahead assertion for at least one special character
+- /.{8,} / - Matches any character (except newline) at least 8 times
+- /$/ - Matches the end of the string
 
 If one of these validations fail, the password is not accepted. This advises
 the user to create a strong password.
@@ -79,5 +79,6 @@ This project is available for viewing at [Sign up form](https://makieldeviso.git
 Credits to images:
 
 [Helmet image](https://sk.pinterest.com/pin/512425263857325426/)
-[Helmet-image2](https://www.pinterest.ph/pin/1066368017996818992/ - https://pin.it/3RVwmOn)
+
+[Helmet-image2](https://www.pinterest.ph/pin/1066368017996818992/)
 

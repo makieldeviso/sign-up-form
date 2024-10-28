@@ -7,44 +7,45 @@ function verifyEventAdd(element, event, functionName) {
 }
 
 const firstName = document.querySelector("#first-name");
-    verifyEventAdd(firstName, "blur", validateInputField);
+verifyEventAdd(firstName, "blur", validateInputField);
     
 const lastName = document.querySelector("#last-name");
-    verifyEventAdd(lastName, "blur", validateInputField);
+verifyEventAdd(lastName, "blur", validateInputField);
 
 const email = document.querySelector("#email");
-    verifyEventAdd(email, "blur", validateInputField);
+verifyEventAdd(email, "blur", validateInputField);
 
 const phoneNumber = document.querySelector("#phone");
-    verifyEventAdd(phoneNumber, "blur", validateInputField);
+verifyEventAdd(phoneNumber, "blur", validateInputField);
 
 const password = document.querySelector("#password");
-    verifyEventAdd(password, "mousedown", validatePassword);
-    verifyEventAdd(password, "input", validatePassword);
-    verifyEventAdd(password, "blur", validatePassword);
+verifyEventAdd(password, "mousedown", validatePassword);
+verifyEventAdd(password, "input", validatePassword);
+verifyEventAdd(password, "blur", validatePassword);
 
 const confirmPassword = document.querySelector("#confirm-password");
-    verifyEventAdd(confirmPassword, "mousedown", validateConfirmPassword);
-    verifyEventAdd(confirmPassword, "input", validateConfirmPassword);
-    verifyEventAdd(confirmPassword, "blur", validateConfirmPassword);
+verifyEventAdd(confirmPassword, "mousedown", validateConfirmPassword);
+verifyEventAdd(confirmPassword, "input", validateConfirmPassword);
+verifyEventAdd(confirmPassword, "blur", validateConfirmPassword);
 
 const unmaskButton = document.querySelector(`button[data-action="unmask"]`);
 const unmaskButtonConfirm = document.querySelector(`button[data-action="unmaskConfirm"]`);
-    verifyEventAdd(unmaskButton, "mousedown", unmaskPassword);
-    verifyEventAdd(unmaskButtonConfirm, "mousedown", unmaskPassword);
+verifyEventAdd(unmaskButton, "mousedown", unmaskPassword);
+verifyEventAdd(unmaskButtonConfirm, "mousedown", unmaskPassword);
 
 const terms = document.querySelector("input#terms");
-    verifyEventAdd(terms, "change", validatesTerms);
-    verifyEventAdd(terms, "blur", validatesTerms);
+verifyEventAdd(terms, "change", validatesTerms);
+verifyEventAdd(terms, "blur", validatesTerms);
 
 const form = document.querySelector("form.create-account");
-    verifyEventAdd(form, "submit", submitForm);
+verifyEventAdd(form, "submit", submitForm);
 
 const headerBar = document.querySelector("header");
 const headerContent = document.querySelector("header ul");
-    window.addEventListener("scroll", hideHeader);
+window.addEventListener("scroll", hideHeader);
 
-
+const footerYear = document.querySelector('#footer-year');
+footerYear.textContent = (new Date()).getFullYear();
 
 // Toggles password masking (start) ------------
 function MaskFlag(name) {
@@ -126,8 +127,8 @@ function clearStyling() {
     }
 
 function validateInputField() {
-//Gets the input element id as string and 
-//  checks what input field is being validated
+    //Gets the input element id as string and 
+    //  checks what input field is being validated
     let inputField = `${"#" + this.id}`;  // Id Selector String
     let inputElement = document.querySelector(`${inputField}`); //(<input>)
     let inputFieldName = []; // Saves the input field currently active
@@ -137,8 +138,8 @@ function validateInputField() {
     let errorList = document.querySelector(`${inputField} + ul`);
     let errors = [];
 
-// Validation Starts Here
-// Validates First Name Input Field
+    // Validation Starts Here
+    // Validates First Name Input Field
     if (inputField === "#first-name") {
         inputFieldName.push(firstNameStatus); // Remembers that the user has checked/viewed this input field
         
@@ -149,59 +150,59 @@ function validateInputField() {
         }
     }
 
-// Validates Last Name Input Field
-if (inputField === "#last-name") {
-    inputFieldName.push(lastNameStatus); // Remembers that the user has checked/viewed this input field
+    // Validates Last Name Input Field
+    if (inputField === "#last-name") {
+        inputFieldName.push(lastNameStatus); // Remembers that the user has checked/viewed this input field
 
-    if (fieldValue.length === 0) {
-        errors.push("Field is empty. Kindly fill in a valid last name");
-    } else if (fieldValue === null) {
-        errors.push("Kindly enter a valid last name");
-    }
-}
-
-// Validates email Input Field
-if (inputField === "#email") {
-    inputFieldName.push(emailStatus); // Remembers that the user has checked/viewed this input field
-
-    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-
-    if (fieldValue.length === 0) {
-        errors.push("Field is empty. Kindly fill in a valid email address");
-    } else if (fieldValue === null) {
-        errors.push("Kindly enter a valid email address");
+        if (fieldValue.length === 0) {
+            errors.push("Field is empty. Kindly fill in a valid last name");
+        } else if (fieldValue === null) {
+            errors.push("Kindly enter a valid last name");
+        }
     }
 
-    if (emailRegex.test(fieldValue) === false) {
-        if (fieldValue.length != 0) {
+    // Validates email Input Field
+    if (inputField === "#email") {
+        inputFieldName.push(emailStatus); // Remembers that the user has checked/viewed this input field
+
+        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+        if (fieldValue.length === 0) {
+            errors.push("Field is empty. Kindly fill in a valid email address");
+        } else if (fieldValue === null) {
             errors.push("Kindly enter a valid email address");
-        } 
-        errors.push("Reminder: Write it like example@email.com")
-    }
-}
+        }
 
-// Validates phone Input Field
-if (inputField === "#phone") {
-    inputFieldName.push(phoneNumberStatus); // Remembers that the user has checked/viewed this input field
-
-    let phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-
-    if (fieldValue.length === 0) {
-        errors = [];
-    } else if (fieldValue === null) {
-        errors.push("Reminder: Invalid phone number");
-    } else if (fieldValue.length != 0 && phoneRegex.test(fieldValue) === false) {
-        errors.push("Reminder: Invalid phone number");
+        if (emailRegex.test(fieldValue) === false) {
+            if (fieldValue.length != 0) {
+                errors.push("Kindly enter a valid email address");
+            } 
+            errors.push("Reminder: Write it like example@email.com")
+        }
     }
 
-    if (errors.length != 0) {
-        errors.push("Reminder: Phone number is optional");
+    // Validates phone Input Field
+    if (inputField === "#phone") {
+        inputFieldName.push(phoneNumberStatus); // Remembers that the user has checked/viewed this input field
+
+        let phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+        if (fieldValue.length === 0) {
+            errors = [];
+        } else if (fieldValue === null) {
+            errors.push("Reminder: Invalid phone number");
+        } else if (fieldValue.length != 0 && phoneRegex.test(fieldValue) === false) {
+            errors.push("Reminder: Invalid phone number");
+        }
+
+        if (errors.length != 0) {
+            errors.push("Reminder: Phone number is optional");
+        }
     }
-}
 
 
-// Next step in validation
-// Checks if there are any Errors
+    // Next step in validation
+    // Checks if there are any Errors
 
     function removeErrorList(field) { //  (Reusable Function)
         let newErrorList = document.querySelector(`${field} + ul`);
@@ -244,7 +245,7 @@ if (inputField === "#phone") {
             inputFieldName[0]["validity"] = false; // Saves validity to global object
         }
         
-        
+    
     } else if (errors.length === 0) {
         removeErrorList(inputField);
 
@@ -261,7 +262,7 @@ if (inputField === "#phone") {
     // Adds active input listening that guides user if 
     // they already filled in input in correct format, 
     // only triggers if the user has already checked field before
-     
+        
     if (inputFieldName[0]["viewed"] === false) {
         inputFieldName[0]["viewed"] = true;
         inputElement.addEventListener("input", validateInputField);
@@ -449,22 +450,21 @@ function validateConfirmPassword(event) {
         }
     }
 
-function activePassListening() {
-    // Removes confirm pass UI, when password is altered
-    if (confirmPassword.value != passwordInput || confirmPassword.value != password.value) {
-        if (confirmPassword.hasAttribute("class")) {
-            confirmPassword.removeAttribute("class");
-            unmaskButtonConfirm.removeAttribute("class");
-         }
-        confirmInputElement.innerHTML = "";
-        confirmInputElement.parentElement.style.display = "none";
+    function activePassListening() {
+        // Removes confirm pass UI, when password is altered
+        if (confirmPassword.value != passwordInput || confirmPassword.value != password.value) {
+            if (confirmPassword.hasAttribute("class")) {
+                confirmPassword.removeAttribute("class");
+                unmaskButtonConfirm.removeAttribute("class");
+            }
+            confirmInputElement.innerHTML = "";
+            confirmInputElement.parentElement.style.display = "none";
+        }
+        // No UI changes when password matches during active input, 
+        //  so that the user will try to confirm password again
     }
-    // No UI changes when password matches during active input, 
-    //  so that the user will try to confirm password again
-}
 }
 // Validates Confirm Password (end) -----------
-
 
 // Validates Accept Terms and Conditions (start) ------------
 function validatesTerms() {
@@ -535,11 +535,7 @@ function submitForm(event) {
 }
 // Validate and Submit (end) ----------------
 
-
-
-
-// Next page scripts !!!!!!
-
+// Next page scripts 
 // Verify if element exist first before running function
 function runElementFunction(element, functionName) { //Reusable function
     if (element != null) {
